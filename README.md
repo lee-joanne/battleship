@@ -1,4 +1,4 @@
-# Battleship
+# Pirate Ship
 
 ## User Experience (UX)
 
@@ -6,7 +6,7 @@
 
     - First Time Visitor Goals
 
-        1. As a First Time User, I want to fully understand what this game is. I can see as soon as I run the game that the game is called Battleship and shows me a brief description of the game. 
+        1. As a First Time User, I want to fully understand what this game is. I can see as soon as I run the game that the game is called Pirate Ship and shows me a brief description of the game. The game seems to closely resemble Battleships.
 
         2. As a First Time User, I want to understand how to play the game. After typing in my name to the game, the game responds with my name which is nice to personalize the game, and gives me a very thorough explanation on how to play the game. I know exactly what is expected of me, what I need to achieve in this game, and how I can achieve it. 
 
