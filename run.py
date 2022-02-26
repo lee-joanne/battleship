@@ -1,8 +1,10 @@
+import random
+
 def introduce_game():
     '''
     Initial message to introduce title of the game.
     Input will appear for user to type in their name.
-    Paragraph will appear to explain rules of the game and ask user if they wish to continue
+    Paragraph will appear to explain rules of the game and ask user if they wish to continue.
     '''
     print('-' * 80)
     print('')
@@ -17,18 +19,39 @@ def introduce_game():
     return confirmation_response
 
 def take_user_response():
-
-    conf_resp = introduce_game()
     '''
     Function to either run or close the game depending on user's response after introducing game.
     '''
+    conf_resp = introduce_game()
     if (conf_resp == 'aye'):
         print("You chose aye!")
     elif (conf_resp == 'nay'):
         print('you chose nay!')
     else:
         print("You must type either 'aye' or 'nay'!")
+    
+def create_boards():
+    '''
+    Function to create the user's and computer's game board once the user has confirmed 'aye' to play.
+    '''
 
+class GameBoard:
+    '''
+    Creates the game boards class used in the Pirate Ship game.
+    '''
+    def __init__(self, size, name, type):
+        ## properties
+        self.size = self.size
+        self.board[['.' for x in range(size)] for y in range(size)]
+        self.num_ships = 5
+        self.name = name
+        self.type = type
+        self.guesses = []
+        self.ships = []
+
+    
+
+    
 
 def main():
     take_user_response()
