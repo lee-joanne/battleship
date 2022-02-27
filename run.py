@@ -32,28 +32,31 @@ def ask_user_ready():
         else:
             print("You must type either 'aye' or 'nay'!")
 
-    
-def create_boards():
-    '''
-    Function to create the user's and computer's game board once the user has confirmed 'aye' to play.
-    '''
-
 class GameBoard:
     '''
     Creates the game boards class used in the Pirate Ship game.
     '''
-    def __init__(self, size, name, type):
-        ## properties
-        self.size = self.size
-        ##self.board[['.' for x in range(size)] for y in range(size)]
-        self.num_ships = 5
+    def __init__(self, name):
         self.name = name
-        self.type = type
+        self.num_ships = 5
         self.guesses = []
         self.ships = []
+    
+    def convert_letters_to_numbers():
+        letters_to_numbers = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5}
+        return letters_to_numbers
+    
+def build_board():
+    print("      A    B    C    D    E    F")
+    print("      -----------------------------")
+    row_board = [0, "| |, | |, | |, | |, | |, | |"]
+    for i in range(5):
+        row_board[0] += 1
+        print(row_board)
 
 def main():
     introduce_game()
     ask_user_ready()
 
-main()
+#main()
+build_board()
