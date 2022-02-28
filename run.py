@@ -40,23 +40,27 @@ class GameBoard:
         self.name = name
         self.num_ships = 5
         self.guesses = []
-        self.ships = []
+        self.board = [
+            [" ",  " A", "  B", "  C", "  D", "  E"],
+            ["1", "| |", "| |", "| |", "| |", "| |"],
+            ["2", "| |", "| |", "| |", "| |", "| |"],
+            ["3", "| |", "| |", "| |", "| |", "| |"],
+            ["4", "| |", "| |", "| |", "| |", "| |"],
+            ["5", "| |", "| |", "| |", "| |", "| |"],
+        ]
     
-    def convert_letters_to_numbers():
+    def convert_letters_to_numbers(self):
         letters_to_numbers = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5}
         return letters_to_numbers
-    
-def build_board():
-    print("      A    B    C    D    E    F")
-    print("      -----------------------------")
-    row_board = [0, "| |, | |, | |, | |, | |, | |"]
-    for i in range(5):
-        row_board[0] += 1
-        print(row_board)
 
+    def display_board(self):
+        print("The board")
+        for row in board:
+            joint_row = "  ".join(row)
+            print(f"{joint_row}\n")
+    
 def main():
     introduce_game()
     ask_user_ready()
 
-#main()
-build_board()
+main()
