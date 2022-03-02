@@ -40,7 +40,9 @@ class GameBoard:
         self.name = name
         self.num_ships = 5
         self.guesses = []
-        self.board = [
+        self.user_board = []
+        self.coordinates = []
+        self.computer_board = [
             [" ",  " A", "  B", "  C", "  D", "  E"],
             ["1", "| |", "| |", "| |", "| |", "| |"],
             ["2", "| |", "| |", "| |", "| |", "| |"],
@@ -58,12 +60,26 @@ class GameBoard:
             joint_row = "  ".join(row)
             print(f"{joint_row}\n")
 
-    def convert_row_to_number(self, rows):
+    def convert_row_to_number(self):
         '''
         Converts the string rows into integers.
         '''
         converted_row = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4}
         return converted_row
+
+    def create_random_user_board(self):
+        """
+        needs to be done
+        """
+        self.user_board = [
+            [" ",  " A", "  B", "  C", "  D", "  E"],
+            ["1", "| |", "| |", "| |", "| |", "| |"],
+            ["2", "| |", "| |", "| |", "| |", "| |"],
+            ["3", "| |", "| |", "| |", "| |", "| |"],
+            ["4", "| |", "| |", "| |", "| |", "| |"],
+            ["5", "| |", "| |", "| |", "| |", "| |"],
+        ]
+        return self.randomize_ship_coordinates()
 
     def randomize_ship_coordinates(self):
         '''
@@ -71,25 +87,21 @@ class GameBoard:
         '''
         board_rows = ["A", "B", "C", "D", "E"]
         board_columns = [1, 2, 3, 4, 5]
-        coordinates = []
-        x = 0
-        while x < 5:
+
+        current_ships_deployed: int = 0
+        while current_ships_deployed < 5:
             rows = random.choice(board_rows)
             columns = random.choice(board_columns)
             converted_row = self.convert_row_to_number(rows)
             random_coordinates = [columns, converted_row]
-            if random_coordinates in coordinates:
-                pass
-            else:
-                coordinates.append(random_coordinates)
-                x += 1
-        return coordinates
-    
-    def place_ships(self):
-        pass
+            if random_coordinates not in self.coordinates:
+                self.coordinates.append(random_coordinates)
+                self.user_board[converted_row][columns] = "|X|"
+                current_ships_deployed += 1
 
 def start_game():
-    pass
+    game_board = GameBoard(name="user")
+    game_board.create_random_user_board()
 
 def end_game():
     '''
@@ -97,7 +109,6 @@ def end_game():
     '''
     print("Goodbye! To play again, please click 'Run Program'!")
 
-    
 def main():
     '''
     Main code to execute the entire Python script
