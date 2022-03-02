@@ -27,7 +27,7 @@ def ask_user_ready():
             print("You chose aye!")
             break
         elif (confirmation_response == 'nay'):
-            print('you chose nay!')
+            end_game()
             break
         else:
             print("You must type either 'aye' or 'nay'!")
@@ -58,8 +58,21 @@ class GameBoard:
         for row in board:
             joint_row = "  ".join(row)
             print(f"{joint_row}\n")
+
+    def place_ships(self):
+        pass
+    
+def end_game():
+    '''
+    When user chooses to end game, will create a goodbye message and give instructions to let the user know how to reactive the game.
+    '''
+    print("Goodbye! To play again, please click 'Run Program'!")
+
     
 def main():
+    '''
+    Main code to execute the entire Python script
+    '''
     introduce_game()
     ask_user_ready()
 
