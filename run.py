@@ -24,7 +24,7 @@ def ask_user_ready():
         confirmation_response = input("aye or nay? ")
 
         if (confirmation_response == 'aye'):
-            print("You chose aye!")
+            start_game()
             break
         elif (confirmation_response == 'nay'):
             end_game()
@@ -48,20 +48,49 @@ class GameBoard:
             ["4", "| |", "| |", "| |", "| |", "| |"],
             ["5", "| |", "| |", "| |", "| |", "| |"],
         ]
-    
-    def convert_letters_to_numbers(self):
-        letters_to_numbers = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5}
-        return letters_to_numbers
 
     def display_board(self):
+        '''
+        Will display the board to the user.
+        '''
         print("The board")
         for row in board:
             joint_row = "  ".join(row)
             print(f"{joint_row}\n")
 
+    def convert_row_to_number(self, rows):
+        '''
+        Converts the string rows into integers.
+        '''
+        converted_row = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4}
+        return converted_row
+
+    def randomize_ship_coordinates(self):
+        '''
+        Function will randomly create coordinates on where to place the ships.
+        '''
+        board_rows = ["A", "B", "C", "D", "E"]
+        board_columns = [1, 2, 3, 4, 5]
+        coordinates = []
+        x = 0
+        while x < 5:
+            rows = random.choice(board_rows)
+            columns = random.choice(board_columns)
+            converted_row = self.convert_row_to_number(rows)
+            random_coordinates = [columns, converted_row]
+            if random_coordinates in coordinates:
+                pass
+            else:
+                coordinates.append(random_coordinates)
+                x += 1
+        return coordinates
+    
     def place_ships(self):
         pass
-    
+
+def start_game():
+    pass
+
 def end_game():
     '''
     When user chooses to end game, will create a goodbye message and give instructions to let the user know how to reactive the game.
