@@ -15,7 +15,7 @@ def introduce_game():
     print('-' * 80)
     user_name = input("Ahoy matey! Please enter your pirate name: ")
     print('')
-    print(f"Welcome aboard Pirate {user_name}! There is trouble...The enemies have stolen our beloved rum and treasure! \nThey are scattered across the Black Sea. We must shoot our \cannons and try to take their ships down. \nThey have cannons of their own so they will try to hit one of our ships too! \nThe sea board contains five by five squares in x,y coordinates. \nYou must guess the coordinates to take down their ships. The first to destroy all ships wins the rum and treasure! \nUs and the enemies both have a total of 5 ships to take down. \nAre you ready?")
+    print(f"Welcome aboard Pirate {user_name}! There is trouble...The enemies have stolen our beloved rum and treasure! \nThey are scattered across the Black Sea. We must shoot our cannons and try to take their ships down. \nThey have cannons of their own so they will try to hit one of our ships too! \nThe sea board contains five by five squares in x,y coordinates. \nYou must guess the coordinates to take down their ships. The first to destroy all ships wins the rum and treasure! \nUs and the enemies both have a total of 5 ships to take down. \nAre you ready?")
     print('')
 
 def ask_user_ready():
@@ -42,9 +42,6 @@ class GameBoard:
 
     def __init__(self, name):
         self.name = name
-        self.num_ships = 3
-        self.guesses = []
-        self.coordinates = []
         self.board = [
             [" ",  " A", "  B", "  C", "  D", "  E"],
             ["1", "| |", "| |", "| |", "| |", "| |"],
@@ -69,16 +66,19 @@ class GameBoard:
         Function will randomly create coordinates on where to place the ships.
         Function will place the ships, marked as |O|.
         '''
-        width = random.randint(1, 5)
-        height = random.randint(1, 5)
-
-        for w in range(width):
-            self.board_array[height, 1:w] = '|O|'
-        for v in range(height):
-            self.board_array[1:v, width] = '|O|'
+        x = 0
+        while x < 5:
+            column = random.randint(1, 5)
+            row = random.randint(1, 5)
+            random_coordinates = [row, column]
+            if random_coordinates == self.board_array:
+                pass
+            else:
+                self.board_array[row, column] = '|O|'
+                x += 1
         print(self.board_array)
 
-    def place_hit(self):
+    def user_turn_place_hit(self):
         '''
         Function will allow user to type in coordinates
         to place hit.
@@ -88,20 +88,19 @@ class GameBoard:
         Allows user to play again if hit.
         '''
         list_of_ship_coord = list(zip(*np.where(self.board_array == '|O|')))
-        x_coord = int(input("Input number coordinate (1 to 5): "))
         y_choice = input("Input letter coordinate (A to E): ")
+        x_coord = int(input("Input number coordinate (1 to 5): "))
         column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
         y_coord = column_map[y_choice]
-
-        self.board_array[x_coord, y_coord] = ' x '
         shot = (x_coord, y_coord)
-
         miss_count = 0
         for item in list_of_ship_coord:
             if item == shot:
+                self.board_array[x_coord, y_coord] = '|X|'
                 print('You hit a battleship! Take another turn.')
                 break
             else:
+                self.board_array[x_coord, y_coord] = '|-|'
                 miss_count += 1
                 if miss_count == len(list_of_ship_coord):
                     print("You missed!")
@@ -114,9 +113,9 @@ def start_game():
     Function will start the game when user confirms game start.
     '''
     user_board = GameBoard("name=user")
-    user_board.display_board()
+    #user_board.display_board()
     user_board.randomize_ship_coordinates()
-    user_board.place_hit()
+    user_board.user_turn_place_hit()
 
 def end_game():
     '''
