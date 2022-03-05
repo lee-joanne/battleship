@@ -66,16 +66,15 @@ class GameBoard:
         Function will randomly create coordinates on where to place the ships.
         Function will place the ships, marked as |O|.
         '''
-        x = 0
-        while x < 5:
+        count = 0
+        while count < 5:
             column = random.randint(1, 5)
             row = random.randint(1, 5)
-            random_coordinates = [row, column]
-            if random_coordinates == self.board_array:
+            if self.board_array[row, column] == '|O|':
                 pass
             else:
                 self.board_array[row, column] = '|O|'
-                x += 1
+                count += 1
         print(self.board_array)
 
     def user_turn_place_hit(self):
