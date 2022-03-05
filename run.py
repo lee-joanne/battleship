@@ -1,6 +1,15 @@
 import random
 import numpy as np
 
+instructions = """There is trouble...The enemies stole our treasure!
+They are scattered across the Black Sea. 
+We must shoot our cannons and try to take their ships down. 
+They have cannons of their own so they will try to hit one of our ships too!
+The sea board contains five by five squares in x,y coordinates. 
+You must guess the coordinates to take down their ships. 
+The first to destroy all ships wins the rum and treasure! 
+Us and the enemies both have a total of 5 ships to take down."""
+
 def introduce_game():
     '''
     Initial message to introduce title of the game.
@@ -13,9 +22,13 @@ def introduce_game():
     print("Welcome to Pirate Ship!")
     print('')
     print('-' * 80)
+    print('')
     user_name = input("Ahoy matey! Please enter your pirate name: ")
     print('')
-    print(f"Welcome aboard Pirate {user_name}! There is trouble...The enemies have stolen our beloved rum and treasure! \nThey are scattered across the Black Sea. We must shoot our cannons and try to take their ships down. \nThey have cannons of their own so they will try to hit one of our ships too! \nThe sea board contains five by five squares in x,y coordinates. \nYou must guess the coordinates to take down their ships. The first to destroy all ships wins the rum and treasure! \nUs and the enemies both have a total of 5 ships to take down. \nAre you ready?")
+    print(f"Welcome aboard Pirate {user_name}!")
+    print(instructions)
+    print('')
+    print(f"Are you ready, Pirate {user_name}?")
     print('')
 
 def ask_user_ready():
@@ -87,26 +100,41 @@ class GameBoard:
         Allows user to play again if hit.
         '''
         list_of_ship_coord = list(zip(*np.where(self.board_array == '|O|')))
-        while True:
-            validate_string_input()
-            validate_number_input()
-            column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
-            y_coord = column_map[y_choice]
-            shot = (x_coord, y_coord)
-            miss_count = 0
-            for item in list_of_ship_coord:
-                if item == shot:
-                    self.board_array[x_coord, y_coord] = '|X|'
-                    print('You hit a battleship! Take another turn.')
-                    break
+        try:
+            y_choice = input("Input letter coordinate in capitals (A to E): ")
+            y_lst = ['A', 'B', 'C', 'D', 'E']
+            if y_choice not in y_lst:
+                raise ValueError(
+                    f"Value must be a capital letter from A to E! You typed {y_choice}")
+        except ValueError as e:
+            print(f"Invalid data: {e}, please try again.\n")
+
+        try:
+            x_coord = int(input("Input number coordinate (1 to 5):: "))
+            x_lst = [1, 2, 3, 4, 5]
+            if x_coord not in x_lst:
+                raise ValueError(
+                    f"Value must be a letter between 1 to 5! You typed {x_coord}")
+        except ValueError as e:
+            print(f"Invalid data: {e}, please try again.\n")
+            
+        column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
+        y_coord = column_map[y_choice]
+        shot = (x_coord, y_coord)
+        miss_count = 0
+        for item in list_of_ship_coord:
+            if item == shot:
+                self.board_array[x_coord, y_coord] = '|X|'
+                print('You hit a battleship! Take another turn.')
+                break
+            else:
+                self.board_array[x_coord, y_coord] = '|-|'
+                miss_count += 1
+                if miss_count == len(list_of_ship_coord):
+                    print("You missed!")
                 else:
-                    self.board_array[x_coord, y_coord] = '|-|'
-                    miss_count += 1
-                    if miss_count == len(list_of_ship_coord):
-                        print("You missed!")
-                    else:
-                        pass
-            print(self.board_array)
+                    pass
+        print(self.board_array)
 
 def start_game():
     '''
@@ -133,41 +161,5 @@ def main():
     '''
     introduce_game()
     ask_user_ready()
-
-def validate_string_input():
-    '''
-    Function will validate user input for Y coordinate.
-    If input does not match A, B, C, D, or E, will
-    show error message to user.
-    '''
-    while True:
-        try:
-            y_choice = input("Input letter coordinate in capitals (A to E): ")
-            y_lst = ['A', 'B', 'C', 'D', 'E']
-            if y_choice not in y_lst:
-                raise ValueError(
-                    f"Value must be a capital letter from A to E! You typed {y_choice}")
-        except ValueError as e:
-            print(f"Invalid data: {e}, please try again.\n")
-            return False
-    return True
-
-def validate_number_input():
-    '''
-    Function will validate user input for X coordinate.
-    If input does not match 1, 2, 3, 4, 5 will
-    show error message to user.
-    '''
-    while True:
-        try:
-            x_coord = int(input("Input number coordinate (1 to 5):: "))
-            x_lst = ['A', 'B', 'C', 'D', 'E']
-            if x_coord not in x_lst:
-                raise ValueError(
-                    f"Value must be a letter between 1 to 5! You typed {x_coord}")
-        except ValueError as e:
-            print(f"Invalid data: {e}, please try again.\n")
-            return False
-    return True
 
 main()
