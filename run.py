@@ -117,7 +117,7 @@ class GameBoard:
                     f"Value must be a letter between 1 to 5! You typed {x_coord}")
         except ValueError as e:
             print(f"Invalid data: {e}, please try again.\n")
-            
+
         column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
         y_coord = column_map[y_choice]
         shot = (x_coord, y_coord)
@@ -125,16 +125,42 @@ class GameBoard:
         for item in list_of_ship_coord:
             if item == shot:
                 self.board_array[x_coord, y_coord] = '|X|'
+                print('')
                 print('You hit a battleship! Take another turn.')
+                print('')
                 break
             else:
                 self.board_array[x_coord, y_coord] = '|-|'
                 miss_count += 1
                 if miss_count == len(list_of_ship_coord):
+                    print('')
                     print("You missed!")
+                    print('')
                 else:
                     pass
         print(self.board_array)
+
+    def computer_turn_place_hit(self):
+        '''
+        When it is the computer's turn, automatically will
+        generate a coordinate and direct a hit at the 
+        user board.
+        '''
+        y_target = random.randint(1, 5)
+        x_target = random.randint(1, 5)
+        random_target = [y_target, x_target]
+        if random_target == self.board_array:
+            self.board_array[x_target, y_target]= '|X|'
+            print('')
+            print('Oh no! The enemy has hit a ship! They can take another turn.')
+            print('')
+        else:
+            self.board_array[x_target, y_target] = '|-|'
+            print('')
+            print("The enemy missed!")
+            print('')   
+        print(self.board_array)
+
 
 def start_game():
     '''
@@ -146,6 +172,7 @@ def start_game():
     user_board.randomize_ship_coordinates()
     computer_board.randomize_ship_coordinates()
     computer_board.user_turn_place_hit()
+    user_board.computer_turn_place_hit()
 
 
 def end_game():
