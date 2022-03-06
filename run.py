@@ -23,7 +23,7 @@ def introduce_game():
     print('')
     print('-' * 80)
     print('')
-    user_name = input("Ahoy matey! Please enter your pirate name: ")
+    user_name = input("Ahoy matey! Please enter your pirate name:\n")
     print('')
     print(f"Welcome aboard Pirate {user_name}!")
     print(instructions)
@@ -37,7 +37,7 @@ def ask_user_ready():
     Loops the response if invalid response is given.
     '''
     while True:
-        confirmation_response = input("aye or nay? ")
+        confirmation_response = input("aye or nay?\n")
 
         if confirmation_response == 'aye':
             start_game()
@@ -98,7 +98,7 @@ class GameBoard:
         '''
         while True:
             try:
-                y_choice = input("Input letter coordinate (A to E): ").upper()
+                y_choice = input("Input letter coordinate (A to E):\n").upper()
                 y_lst = ['A', 'B', 'C', 'D', 'E']
                 if y_choice not in y_lst:
                     raise ValueError(
@@ -118,7 +118,7 @@ class GameBoard:
         '''
         while True:
             try:
-                x_coord = (input("Input number coordinate (1 to 5): "))
+                x_coord = (input("Input number coordinate (1 to 5):\n"))
                 x_lst = ["1", "2", "3", "4", "5"]
                 if x_coord not in x_lst:
                     raise ValueError(
@@ -203,7 +203,6 @@ class GameBoard:
         while(computer_score) <5:
             self.computer_turn_place_hit()
 
-            
 def start_game():
     '''
     Function will start the game when user confirms game start.

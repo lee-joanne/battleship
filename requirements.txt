@@ -1,1 +1,2 @@
-# Your requirements go here
+darker==1.4.1
+numpy==1.22.2
