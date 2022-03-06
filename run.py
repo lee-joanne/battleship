@@ -99,45 +99,49 @@ class GameBoard:
         user misses and calls computer's turn.
         Allows user to play again if hit.
         '''
-        try:
-            y_choice = input("Input letter coordinate in capitals (A to E): ")
-            y_lst = ['A', 'B', 'C', 'D', 'E']
-            if y_choice not in y_lst:
-                raise ValueError(
-                    f"Value must be a capital letter from A to E! You typed {y_choice}")
-        except ValueError as e:
-            print(f"Invalid data: {e}, please try again.\n")
+        while True:
+            try:
+                y_choice = input("Input letter coordinate (A to E): ").upper()
+                y_lst = ['A', 'B', 'C', 'D', 'E']
+                if y_choice not in y_lst:
+                    raise ValueError(
+                        f"Value must be a capital letter from A to E! You typed {y_choice}")
+            except ValueError as e:
+                print(f"Invalid data: {e}, please try again.\n")
+                continue
+            else:
+                break
 
-        try:
-            x_coord = int(input("Input number coordinate (1 to 5):: "))
-            x_lst = [1, 2, 3, 4, 5]
-            if x_coord not in x_lst:
-                raise ValueError(
-                    f"Value must be a letter between 1 to 5! You typed {x_coord}")
-        except ValueError as e:
-            print(f"Invalid data: {e}, please try again.\n")
+        while True:
+            try:
+                x_coord = (input("Input number coordinate (1 to 5): "))
+                x_lst = ["1", "2", "3", "4", "5"]
+                if x_coord not in x_lst:
+                    raise ValueError(
+                        f"Value must be a letter between 1 to 5! You typed {x_coord}")
+            except ValueError as e:
+                print(f"Invalid data: {e}, please try again.\n")
+                continue
+            else:
+                break
 
         column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
         y_coord = column_map[y_choice]
-
+        x_coord = int(x_coord)
         if self.board_array[x_coord, y_coord] == '|O|':
             self.board_array[x_coord, y_coord] = '|X|'
             print('')
             print('You hit a battleship! Take another turn.')
             print('')
-            
         elif self.board_array[x_coord, y_coord] == '|X|':
-            print("You already hit here! Try again! ds")
-            
+            print("You already hit here! Try again!")
         elif self.board_array[x_coord, y_coord] == '|-|':
-            print("You already hit here! Try again! sd")
-            
+            print("You already hit here! Try again!")
         else:
             self.board_array[x_coord, y_coord] = '|-|'
             print('')
             print("You missed!")
             print('')
-
         print(self.board_array)
 
     def computer_turn_place_hit(self):
@@ -164,6 +168,14 @@ class GameBoard:
             print('')   
         print(self.board_array)
 
+        def count_score(self):
+            '''
+            Function will keep count of the user's score and
+            computer's score. Will increment each time the
+            user or computer hits a ship.
+            '''
+            pass
+
 def start_game():
     '''
     Function will start the game when user confirms game start.
@@ -175,7 +187,6 @@ def start_game():
     computer_board.randomize_ship_coordinates()
     computer_board.user_turn_place_hit()
     user_board.computer_turn_place_hit()
-
 
 def end_game():
     '''
