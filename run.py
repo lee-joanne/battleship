@@ -90,14 +90,11 @@ class GameBoard:
                 count += 1
         print(self.board_array)
 
-    def user_turn_place_hit(self):
+    def validate_y_coordinate(self):
         '''
-        Function will allow user to type in coordinates
-        to place hit.
-        Will give message back to user depending on
-        hit or miss. Increments miss_count if
-        user misses and calls computer's turn.
-        Allows user to play again if hit.
+        Function will validate whether input from user
+        is a letter ranging from a to e, or else will
+        return ValueError message.
         '''
         while True:
             try:
@@ -111,7 +108,14 @@ class GameBoard:
                 continue
             else:
                 break
-
+        return y_choice
+    
+    def validate_x_coordinate(self):
+        '''
+        Function will validate whether input from user
+        is a number ranging from 1 to 5, or else will
+        return ValueError message.
+        '''
         while True:
             try:
                 x_coord = (input("Input number coordinate (1 to 5): "))
@@ -124,15 +128,27 @@ class GameBoard:
                 continue
             else:
                 break
+        return x_coord
 
+    def user_turn_place_hit(self):
+        '''
+        Function will allow user to type in coordinates
+        to place hit.
+        Will give message back to user depending on
+        hit or miss. Increments miss_count if
+        user misses and calls computer's turn.
+        Allows user to play again if hit.
+        '''
         column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
-        y_coord = column_map[y_choice]
-        x_coord = int(x_coord)
+        y_coord = column_map[self.validate_y_coordinate()]
+        x_coord = int(self.validate_x_coordinate())
+        user_score_counter = 0
         if self.board_array[x_coord, y_coord] == '|O|':
             self.board_array[x_coord, y_coord] = '|X|'
             print('')
-            print('You hit a battleship! Take another turn.')
+            print('You hit a battleship! Great job!')
             print('')
+            user_score_counter += 1
         elif self.board_array[x_coord, y_coord] == '|X|':
             print("You already hit here! Try again!")
         elif self.board_array[x_coord, y_coord] == '|-|':
@@ -144,12 +160,15 @@ class GameBoard:
             print('')
         print(self.board_array)
 
+        return user_score_counter
+
     def computer_turn_place_hit(self):
         '''
         When it is the computer's turn, automatically will
         generate a coordinate and direct a hit at the 
         user board.
         '''
+        computer_score_counter = 0
         y_target = random.randint(1, 5)
         x_target = random.randint(1, 5)
         if self.board_array[x_target, y_target] == '|X|':
@@ -159,7 +178,8 @@ class GameBoard:
         elif self.board_array[x_target, y_target] == '|0|':
             self.board_array[x_target, y_target] = '|X|'
             print('')
-            print('Oh no! The enemy has hit a ship! They can take another turn.')
+            print('Oh no! The enemy has hit a ship!')
+            computer_score_counter += 1
             print('')
         else: 
             self.board_array[x_target, y_target] = '|-|'
@@ -167,15 +187,23 @@ class GameBoard:
             print("The enemy missed!")
             print('')   
         print(self.board_array)
+        return computer_score_counter
 
-        def count_score(self):
-            '''
-            Function will keep count of the user's score and
-            computer's score. Will increment each time the
-            user or computer hits a ship.
-            '''
-            pass
+    def progress_game(self):
+        '''
+        Function allow the keep to continuously run until
+        computer or user scores 5 points. Function will
+        keep track of incrementing score.
+        '''
+        user_score = self.user_turn_place_hit()
+        computer_score = self.computer_turn_place_hit()
+        while(user_score) < 5:
+            self.user_turn_place_hit()
 
+        while(computer_score) <5:
+            self.computer_turn_place_hit()
+
+            
 def start_game():
     '''
     Function will start the game when user confirms game start.
@@ -187,6 +215,9 @@ def start_game():
     computer_board.randomize_ship_coordinates()
     computer_board.user_turn_place_hit()
     user_board.computer_turn_place_hit()
+    computer_board.progress_game()
+
+    return user_board
 
 def end_game():
     '''
