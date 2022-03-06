@@ -99,7 +99,6 @@ class GameBoard:
         user misses and calls computer's turn.
         Allows user to play again if hit.
         '''
-        list_of_ship_coord = list(zip(*np.where(self.board_array == '|O|')))
         try:
             y_choice = input("Input letter coordinate in capitals (A to E): ")
             y_lst = ['A', 'B', 'C', 'D', 'E']
@@ -120,24 +119,25 @@ class GameBoard:
 
         column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
         y_coord = column_map[y_choice]
-        shot = (x_coord, y_coord)
-        miss_count = 0
-        for item in list_of_ship_coord:
-            if item == shot:
-                self.board_array[x_coord, y_coord] = '|X|'
-                print('')
-                print('You hit a battleship! Take another turn.')
-                print('')
-                break
-            else:
-                self.board_array[x_coord, y_coord] = '|-|'
-                miss_count += 1
-                if miss_count == len(list_of_ship_coord):
-                    print('')
-                    print("You missed!")
-                    print('')
-                else:
-                    pass
+
+        if self.board_array[x_coord, y_coord] == '|O|':
+            self.board_array[x_coord, y_coord] = '|X|'
+            print('')
+            print('You hit a battleship! Take another turn.')
+            print('')
+            
+        elif self.board_array[x_coord, y_coord] == '|X|':
+            print("You already hit here! Try again! ds")
+            
+        elif self.board_array[x_coord, y_coord] == '|-|':
+            print("You already hit here! Try again! sd")
+            
+        else:
+            self.board_array[x_coord, y_coord] = '|-|'
+            print('')
+            print("You missed!")
+            print('')
+
         print(self.board_array)
 
     def computer_turn_place_hit(self):
@@ -148,19 +148,21 @@ class GameBoard:
         '''
         y_target = random.randint(1, 5)
         x_target = random.randint(1, 5)
-        random_target = [y_target, x_target]
-        if random_target == self.board_array:
-            self.board_array[x_target, y_target]= '|X|'
+        if self.board_array[x_target, y_target] == '|X|':
+            pass
+        elif self.board_array[x_target, y_target] == '|-|':
+            pass
+        elif self.board_array[x_target, y_target] == '|0|':
+            self.board_array[x_target, y_target] = '|X|'
             print('')
             print('Oh no! The enemy has hit a ship! They can take another turn.')
             print('')
-        else:
+        else: 
             self.board_array[x_target, y_target] = '|-|'
             print('')
             print("The enemy missed!")
             print('')   
         print(self.board_array)
-
 
 def start_game():
     '''
