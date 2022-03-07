@@ -8,7 +8,11 @@ They have cannons of their own so they will try to hit one of our ships too!
 The sea board contains five by five squares in x,y coordinates. 
 You must guess the coordinates to take down their ships. 
 The first to destroy all ships wins the rum and treasure! 
-Us and the enemies both have a total of 5 ships to take down."""
+Us and the enemies both have a total of 5 ships to take down.
+
+On your grid, your ships are marked as '|O|'. If a ship is
+hit, it will be marked as '|X|'. If you miss, it will be marked
+as '|-|'."""
 
 def introduce_game():
     '''
@@ -65,6 +69,8 @@ class GameBoard:
             ["5", "| |", "| |", "| |", "| |", "| |"],
         ]
         self.board_array = np.array(self.board)
+        self.user_score = 0
+        self.computer_score = 0
 
     def display_board(self):
         '''
@@ -143,13 +149,12 @@ class GameBoard:
         column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
         y_coord = column_map[self.validate_y_coordinate()]
         x_coord = int(self.validate_x_coordinate())
-        hit = 0
         if self.board_array[x_coord, y_coord] == '|O|':
             self.board_array[x_coord, y_coord] = '|X|'
             print('')
             print(f'You hit a battleship! Great job Pirate {user_name}!')
             print('')
-            hit = 1
+            self.user_score += 1
         elif self.board_array[x_coord, y_coord] == '|X|':
             print("You already hit here! Try again!")
         elif self.board_array[x_coord, y_coord] == '|-|':
@@ -161,15 +166,12 @@ class GameBoard:
             print('')
         print(self.board_array)
 
-        return hit
-
     def computer_turn_place_hit(self):
         '''
         When it is the computer's turn, automatically will
         generate a coordinate and direct a hit at the 
         user board.
         '''
-        computer_score_counter = 0
         y_target = random.randint(1, 5)
         x_target = random.randint(1, 5)
         if self.board_array[x_target, y_target] == '|X|':
@@ -180,7 +182,7 @@ class GameBoard:
             self.board_array[x_target, y_target] = '|X|'
             print('')
             print('Oh no! The enemy has hit a ship!')
-            computer_score_counter += 1
+            self.computer_score += 1
             print('')
         else:
             self.board_array[x_target, y_target] = '|-|'
@@ -188,7 +190,6 @@ class GameBoard:
             print("The enemy missed!")
             print('')
         print(self.board_array)
-        return computer_score_counter
 
     def iterate_user_score(self):
         '''
@@ -196,13 +197,10 @@ class GameBoard:
         user scores 5 points. Function will
         keep track of incrementing score.
         '''
-        hit = self.user_turn_place_hit()
-        user_score = hit
 
-        while(user_score) < 7:
+        while(self.user_score) < 6:
             self.user_turn_place_hit()
-            user_score += 1
-            if (user_score) == 5:
+            if (self.user_score) == 5:
                 self.user_wins()
 
     def iterate_computer_score(self):
@@ -211,13 +209,11 @@ class GameBoard:
         computer scores 5 points. Function will
         keep track of incrementing score.
         '''
-        hit = self.computer_turn_place_hit()
-        computer_score = hit
 
-        while(computer_score) < 7:
+        while(self.computer_score) < 6:
             self.computer_turn_place_hit()
-            computer_score += 1
-            if (computer_score) == 5:
+            self.computer_score += 1
+            if (self.computer_score) == 5:
                 self.computer_wins()
     
     def user_wins(self):
@@ -241,20 +237,42 @@ class GameBoard:
         print("Better luck next time.")
         print("To play again, click 'Run Program' at the top!")
 
+def coin_toss(user_board, computer_board):
+    '''
+    Function will do a coin toss to see
+    if the user or computer goes first.
+    '''
+    print('')
+    print('A coin toss will be done to see who goes first...')
+    print('')
+    if random.randint(1, 100) % 2 == 0:
+        print("You won the coin toss! You go first.")
+        print('')
+        return computer_board.user_turn_place_hit()
+    else:
+        print("You lost the coin toss, computer goes first!")
+        print('')
+        return user_board.computer_turn_place_hit()
+    play = coin_toss(user_board, computer_board)
+    play()
+
 def start_game():
     '''
     Function will start the game when user confirms game start.
     '''
+    global user_board
+    global computer_board
     user_board = GameBoard("name=user")
     computer_board = GameBoard("name=computer")
     #user_board.display_board()
     user_board.randomize_ship_coordinates()
     computer_board.randomize_ship_coordinates()
-    computer_board.user_turn_place_hit()
-    user_board.computer_turn_place_hit()
+    coin_toss(user_board, computer_board)
     computer_board.iterate_user_score()
+    user_board.iterate_computer_score()
 
     return user_board
+    return computer_board
 
 def end_game():
     '''
