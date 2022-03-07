@@ -95,7 +95,7 @@ class GameBoard:
             column = random.randint(1, 5)
             row = random.randint(1, 5)
             if self.board_array[row, column] == '|O|':
-                pass
+                continue
             else:
                 self.board_array[row, column] = '|O|'
                 count += 1
@@ -202,23 +202,28 @@ class GameBoard:
         user misses and calls computer's turn.
         Allows user to play again if hit.
         '''
-        y_coord = self.column_map[self.validate_y_coordinate()]
-        x_coord = int(self.validate_x_coordinate())
-        if self.board_array[x_coord, y_coord] == '|O|':
-            self.board_array[x_coord, y_coord] = '|X|'
-            print('')
-            print(f'You hit a battleship! Great job Pirate {user_name}!')
-            print('')
-            self.user_score += 1
-        elif self.board_array[x_coord, y_coord] == '|X|':
-            print("You already hit here! Try again!")
-        elif self.board_array[x_coord, y_coord] == '|-|':
-            print("You already hit here! Try again!")
-        else:
-            self.board_array[x_coord, y_coord] = '|-|'
-            print('')
-            print("You missed!")
-            print('')
+        while True:
+            y_coord = self.column_map[self.validate_y_coordinate()]
+            x_coord = int(self.validate_x_coordinate())
+            if self.board_array[x_coord, y_coord] == '|O|':
+                self.board_array[x_coord, y_coord] = '|X|'
+                print('')
+                print(f'You hit a battleship! Great job Pirate {user_name}!')
+                print('')
+                self.user_score += 1
+                break
+            elif self.board_array[x_coord, y_coord] == '|X|':
+                print('')
+                print("You already hit here! Try again!")
+            elif self.board_array[x_coord, y_coord] == '|-|':
+                print('')
+                print("You already hit here! Try again!")
+            else:
+                self.board_array[x_coord, y_coord] = '|-|'
+                print('')
+                print("You missed!")
+                print('')
+                break
         self.display_board()
         user_board.computer_turn_place_hit()
 
@@ -313,7 +318,7 @@ def coin_toss(user_board, computer_board):
         print('')
         print("Take a hit at the enemy's board!")
         print('')
-        print(computer_board.board_array)
+        computer_board.display_board()
         return computer_board.user_turn_place_hit()
     else:
         print("You lost the coin toss, computer goes first!")
