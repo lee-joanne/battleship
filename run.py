@@ -78,11 +78,16 @@ class GameBoard:
         self.computer_score = 0
         self.column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
 
+    # Code credit on display_board(self) goes to Damian Jacob
+    # https://github.com/Damianjacob/MS3-Battleship-Game
     def display_board(self):
         '''
         Will display the board to the user.
         '''
-        print(f"\n {self.name}'s board:\n")
+        if self.name == computer_board.name:
+            print("\nEnemy Board\n")
+        else:
+            print(f"\n {user_name}'s Board:\n")
         for row in self.board_array:
             joint_row = "  ".join(row)
             print(f"{joint_row}\n")
@@ -176,8 +181,8 @@ class GameBoard:
         ship_count = 0
         while ship_count < 5:
             while True:
-                y = self.column_map[input("Choose coordinate (A to E):\n").upper()]
-                x = int(input("Choose coordinate (1 to 5):\n"))
+                y = self.column_map[input("Choose letter (A to E):\n").upper()]
+                x = int(input("Choose number (1 to 5):\n"))
                 y_lst = ['A', 'B', 'C', 'D', 'E']
                 x_lst = [1, 2, 3, 4, 5]
                 if y not in y_lst:
@@ -297,8 +302,7 @@ class GameBoard:
 
         while(self.computer_score) < 6:
             self.computer_turn_place_hit()
-            self.computer_score += 1
-            if (self.computer_score) == 5:
+            if (self.computer_score) == 2:
                 self.computer_wins()
 
     def user_wins(self):
@@ -309,7 +313,7 @@ class GameBoard:
         print('')
         print(f"Congratulations Pirate {user_name} You have beat the enemy!")
         print("We have claimed back our beloved treasure! Great job!")
-        print("To play again, hit the 'Run Program' button at the top!")
+        print("To play again, hit thec 'Run Program' button at the top!")
 
     def computer_wins(self):
         '''
