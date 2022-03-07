@@ -2,17 +2,18 @@ import random
 import numpy as np
 
 instructions = """There is trouble...The enemies stole our treasure!
-They are scattered across the Black Sea. 
-We must shoot our cannons and try to take their ships down. 
+They are scattered across the Black Sea.
+We must shoot our cannons and try to take their ships down.
 They have cannons of their own so they will try to hit one of our ships too!
-The sea board contains five by five squares in x,y coordinates. 
-You must guess the coordinates to take down their ships. 
-The first to destroy all ships wins the rum and treasure! 
+The sea board contains five by five squares in x,y coordinates.
+You must guess the coordinates to take down their ships.
+The first to destroy all ships wins the rum and treasure!
 Us and the enemies both have a total of 5 ships to take down.
 
 On your grid, your ships are marked as '|O|'. If a ship is
 hit, it will be marked as '|X|'. If you miss, it will be marked
 as '|-|'."""
+
 
 def introduce_game():
     '''
@@ -36,6 +37,7 @@ def introduce_game():
     print(f"Are you ready, Pirate {user_name}?")
     print('')
 
+
 def ask_user_ready():
     '''
     Asks the user if they are ready to play the game or not.
@@ -52,6 +54,7 @@ def ask_user_ready():
             break
         else:
             print("You must type either 'aye' or 'nay'!")
+
 
 class GameBoard:
     '''
@@ -111,14 +114,14 @@ class GameBoard:
                 y_lst = ['A', 'B', 'C', 'D', 'E']
                 if y_choice not in y_lst:
                     raise ValueError(
-                        f"Value must be a capital letter from A to E! You typed {y_choice}")
+                        "Value must be a capital letter from A to E!")
             except ValueError as e:
                 print(f"Invalid data: {e}, please try again.\n")
                 continue
             else:
                 break
         return y_choice
-    
+
     def validate_x_coordinate(self):
         '''
         Function will validate whether input from user
@@ -131,7 +134,7 @@ class GameBoard:
                 x_lst = ["1", "2", "3", "4", "5"]
                 if x_coord not in x_lst:
                     raise ValueError(
-                        f"Value must be a letter between 1 to 5! You typed {x_coord}")
+                        "Value must be a letter between 1 to 5!")
             except ValueError as e:
                 print(f"Invalid data: {e}, please try again.\n")
                 continue
@@ -147,7 +150,8 @@ class GameBoard:
         '''
         print('')
         while True:
-            user_answer = input("Would you like to place the ships yourself? y or n?:\n").lower()
+            print("Would you like to place the ships yourself?")
+            user_answer = input("y or n?:\n").lower()
             if user_answer == 'y':
                 user_board.user_choose_ship_placement()
                 break
@@ -158,7 +162,7 @@ class GameBoard:
                 break
             else:
                 print("You must type either 'y' or 'n'!")
-    
+
     def user_choose_ship_placement(self):
         '''
         Function will allow the user to type in their own
@@ -167,8 +171,8 @@ class GameBoard:
         user_board.display_board()
         ship_count = 0
         while ship_count < 5:
-            y = self.column_map[input("Choose your y coordinate (from A to E):\n").upper()]
-            x = int(input("Choose your x coordinates (from 1 to 5:\n"))
+            y = self.column_map[input("Choose A to E coordinate:\n").upper()]
+            x = int(input("Choose 1 to 5 coordinate:\n"))
             self.board_array[y, x] = '|O|'
             ship_count += 1
             user_board.display_board()
@@ -176,7 +180,8 @@ class GameBoard:
             print('')
             print('Great job placing the ships!')
             while True:
-                user_answer = input(f'Are you happy with the ships, Pirate {user_name}? y or n:\n').lower()
+                print(f"Are you happy with the ships, Pirate {user_name}?")
+                user_answer = input('y or n:\n').lower()
                 if user_answer == 'y':
                     print('')
                     user_board.display_board()
@@ -220,7 +225,7 @@ class GameBoard:
     def computer_turn_place_hit(self):
         '''
         When it is the computer's turn, automatically will
-        generate a coordinate and direct a hit at the 
+        generate a coordinate and direct a hit at the
         user board.
         '''
         print('')
@@ -272,7 +277,7 @@ class GameBoard:
             self.computer_score += 1
             if (self.computer_score) == 5:
                 self.computer_wins()
-    
+
     def user_wins(self):
         '''
         Function will congratulate user for winning when
@@ -293,6 +298,7 @@ class GameBoard:
         print("Our beloved treasure has been claimed back and our ships sunk.")
         print("Better luck next time.")
         print("To play again, click 'Run Program' at the top!")
+
 
 def coin_toss(user_board, computer_board):
     '''
@@ -315,6 +321,7 @@ def coin_toss(user_board, computer_board):
     play_game = coin_toss(user_board, computer_board)
     play_game()
 
+
 def start_game():
     '''
     Function will start the game when user confirms game start.
@@ -327,6 +334,7 @@ def start_game():
     computer_board.iterate_user_score()
     user_board.iterate_computer_score()
 
+
 def end_game():
     '''
     When user chooses to end game, will create a goodbye message
@@ -334,11 +342,13 @@ def end_game():
     '''
     print("Goodbye! To play again, please click 'Run Program'!")
 
+
 def main():
     '''
     Main code to execute the entire Python script
     '''
     introduce_game()
     ask_user_ready()
+
 
 main()
