@@ -175,7 +175,7 @@ class GameBoard:
             pass
         elif self.board_array[x_target, y_target] == '|-|':
             pass
-        elif self.board_array[x_target, y_target] == '|0|':
+        elif self.board_array[x_target, y_target] == '|O|':
             self.board_array[x_target, y_target] = '|X|'
             print('')
             print('Oh no! The enemy has hit a ship!')
