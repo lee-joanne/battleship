@@ -175,16 +175,24 @@ class GameBoard:
         user_board.display_board()
         ship_count = 0
         while ship_count < 5:
-            y = self.column_map[input("Choose A to E coordinate:\n").upper()]
-            x = int(input("Choose 1 to 5 coordinate:\n"))
-            self.board_array[y, x] = '|O|'
+            while True:
+                y = self.column_map[input("Choose coordinate (A to E):\n").upper()]
+                x = int(input("Choose coordinate (1 to 5):\n"))
+                y_lst = ['A', 'B', 'C', 'D', 'E']
+                x_lst = [1, 2, 3, 4, 5]
+                if y not in y_lst:
+                    print("You must select a letter from A to E!")
+                elif x not in x_lst:
+                    print("You must select a number from 1 to 5!")
+                else:
+                    break
+            self.board_array[x, y] = '|O|'
             ship_count += 1
             user_board.display_board()
-        else:
-            print('')
-            print('Great job placing the ships!')
-            print('')
-            while True:
+            if ship_count == 5:
+                print('')
+                print('Great job placing the ships!')
+                print('')
                 print(f"Are you happy with the ships, Pirate {user_name}?")
                 user_answer = input('y or n:\n').lower()
                 if user_answer == 'y':
@@ -207,7 +215,7 @@ class GameBoard:
         Will give message back to user depending on
         hit or miss. Increments miss_count if
         user misses and calls computer's turn.
-        Allows user to play again if hit.
+        Allows user to play again   if hit.
         '''
         while True:
             y_coord = self.column_map[self.validate_y_coordinate()]
