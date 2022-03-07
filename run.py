@@ -53,7 +53,9 @@ def ask_user_ready():
             end_game()
             break
         else:
+            print('')
             print("You must type either 'aye' or 'nay'!")
+            print('')
 
 
 class GameBoard:
@@ -161,7 +163,9 @@ class GameBoard:
                 coin_toss(user_board, computer_board)
                 break
             else:
+                print('')
                 print("You must type either 'y' or 'n'!")
+                print('')
 
     def user_choose_ship_placement(self):
         '''
@@ -179,6 +183,7 @@ class GameBoard:
         else:
             print('')
             print('Great job placing the ships!')
+            print('')
             while True:
                 print(f"Are you happy with the ships, Pirate {user_name}?")
                 user_answer = input('y or n:\n').lower()
@@ -191,7 +196,9 @@ class GameBoard:
                 elif user_answer == 'n':
                     continue
                 else:
+                    print('')
                     print("You must type either 'y' or 'n'!")
+                    print('')
 
     def user_turn_place_hit(self):
         '''
@@ -235,23 +242,26 @@ class GameBoard:
         '''
         print('')
         print("Enemy's turn...")
-        y_target = random.randint(1, 5)
-        x_target = random.randint(1, 5)
-        if self.board_array[x_target, y_target] == '|X|':
-            pass
-        elif self.board_array[x_target, y_target] == '|-|':
-            pass
-        elif self.board_array[x_target, y_target] == '|O|':
-            self.board_array[x_target, y_target] = '|X|'
-            print('')
-            print('Oh no! The enemy has hit a ship!')
-            self.computer_score += 1
-            print('')
-        else:
-            self.board_array[x_target, y_target] = '|-|'
-            print('')
-            print("The enemy missed!")
-            print('')
+        while True:
+            y_target = random.randint(1, 5)
+            x_target = random.randint(1, 5)
+            if self.board_array[x_target, y_target] == '|X|':
+                continue
+            elif self.board_array[x_target, y_target] == '|-|':
+                continue
+            elif self.board_array[x_target, y_target] == '|O|':
+                self.board_array[x_target, y_target] = '|X|'
+                print('')
+                print('Oh no! The enemy has hit a ship!')
+                self.computer_score += 1
+                print('')
+                break
+            else:
+                self.board_array[x_target, y_target] = '|-|'
+                print('')
+                print("The enemy missed!")
+                print('')
+                break
         self.display_board()
         print('')
         print("Take a hit at the enemy's board!")
