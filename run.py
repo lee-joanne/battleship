@@ -167,10 +167,6 @@ class GameBoard:
             print('')
         print(self.board_array)
         user_board.computer_turn_place_hit()
-        print('')
-        print("Take a hit at the enemy's board!")
-        print('')
-        print(computer_board.board_array)
 
     def computer_turn_place_hit(self):
         '''
@@ -196,6 +192,10 @@ class GameBoard:
             print("The enemy missed!")
             print('')
         print(self.board_array)
+        print('')
+        print("Take a hit at the enemy's board!")
+        print('')
+        print(computer_board.board_array)
 
     def iterate_user_score(self):
         '''
@@ -255,6 +255,7 @@ def coin_toss(user_board, computer_board):
         print("You won the coin toss! You go first.")
         print('')
         print("Take a hit at the enemy's board!")
+        print('')
         print(computer_board.board_array)
         return computer_board.user_turn_place_hit()
     else:
