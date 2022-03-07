@@ -11,7 +11,7 @@ The first to destroy all ships wins the rum and treasure!
 Us and the enemies both have a total of 5 ships to take down.
 
 On your grid, your ships are marked as '|O|'. If a ship is
-hit, it will be marked as '|X|'. If you miss, it will be marked
+hit, it will be marked as '|X|'. If it's a miss, it will be marked
 as '|-|'."""
 
 
@@ -313,7 +313,7 @@ class GameBoard:
         print('')
         print(f"Congratulations Pirate {user_name} You have beat the enemy!")
         print("We have claimed back our beloved treasure! Great job!")
-        print("To play again, hit thec 'Run Program' button at the top!")
+        print("To play again, hit the 'Run Program' button at the top!")
 
     def computer_wins(self):
         '''
