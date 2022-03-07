@@ -82,8 +82,6 @@ class GameBoard:
             joint_row = "  ".join(row)
             print(f"{joint_row}\n")
 
-        return joint_row
-
     def randomize_ship_coordinates(self):
         '''
         Function will randomly create coordinates on where to place the ships.
@@ -98,7 +96,7 @@ class GameBoard:
             else:
                 self.board_array[row, column] = '|O|'
                 count += 1
-        print(self.board_array)
+        self.display_board()
 
     def validate_y_coordinate(self):
         '''
@@ -155,6 +153,8 @@ class GameBoard:
                 break
             elif user_answer == 'n':
                 user_board.randomize_ship_coordinates()
+                computer_board.randomize_ship_coordinates()
+                coin_toss(user_board, computer_board)
                 break
             else:
                 print("You must type either 'y' or 'n'!")
@@ -164,14 +164,29 @@ class GameBoard:
         Function will allow the user to type in their own
         desired coordinates.
         '''
-        print(user_board.board_array)
+        user_board.display_board()
         ship_count = 0
         while ship_count < 5:
             y = self.column_map[input("Choose your y coordinate (from A to E):\n").upper()]
             x = int(input("Choose your x coordinates (from 1 to 5:\n"))
             self.board_array[y, x] = '|O|'
             ship_count += 1
-        print(user_board.board_array)
+            user_board.display_board()
+        else:
+            print('')
+            print('Great job placing the ships!')
+            while True:
+                user_answer = input(f'Are you happy with the ships, Pirate {user_name}? y or n:\n').lower()
+                if user_answer == 'y':
+                    print('')
+                    user_board.display_board()
+                    computer_board.randomize_ship_coordinates()
+                    coin_toss(user_board, computer_board)
+                    break
+                elif user_answer == 'n':
+                    continue
+                else:
+                    print("You must type either 'y' or 'n'!")
 
     def user_turn_place_hit(self):
         '''
@@ -199,7 +214,7 @@ class GameBoard:
             print('')
             print("You missed!")
             print('')
-        print(self.board_array)
+        self.display_board()
         user_board.computer_turn_place_hit()
 
     def computer_turn_place_hit(self):
@@ -208,6 +223,8 @@ class GameBoard:
         generate a coordinate and direct a hit at the 
         user board.
         '''
+        print('')
+        print("Enemy's turn...")
         y_target = random.randint(1, 5)
         x_target = random.randint(1, 5)
         if self.board_array[x_target, y_target] == '|X|':
@@ -225,11 +242,11 @@ class GameBoard:
             print('')
             print("The enemy missed!")
             print('')
-        print(self.board_array)
+        self.display_board()
         print('')
         print("Take a hit at the enemy's board!")
         print('')
-        print(computer_board.board_array)
+        computer_board.display_board()
 
     def iterate_user_score(self):
         '''
@@ -306,10 +323,7 @@ def start_game():
     global computer_board
     user_board = GameBoard("name=user")
     computer_board = GameBoard("name=computer")
-    #user_board.display_board()
-    computer_board.randomize_ship_coordinates()
     user_board.ask_user_start()
-    coin_toss(user_board, computer_board)
     computer_board.iterate_user_score()
     user_board.iterate_computer_score()
 
