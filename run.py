@@ -105,6 +105,7 @@ class GameBoard:
         '''
         while True:
             try:
+                print('')
                 y_choice = input("Input letter coordinate (A to E):\n").upper()
                 y_lst = ['A', 'B', 'C', 'D', 'E']
                 if y_choice not in y_lst:
@@ -165,6 +166,11 @@ class GameBoard:
             print("You missed!")
             print('')
         print(self.board_array)
+        user_board.computer_turn_place_hit()
+        print('')
+        print("Take a hit at the enemy's board!")
+        print('')
+        print(computer_board.board_array)
 
     def computer_turn_place_hit(self):
         '''
@@ -248,13 +254,14 @@ def coin_toss(user_board, computer_board):
     if random.randint(1, 100) % 2 == 0:
         print("You won the coin toss! You go first.")
         print('')
+        print("Take a hit at the enemy's board!")
+        print(computer_board.board_array)
         return computer_board.user_turn_place_hit()
     else:
         print("You lost the coin toss, computer goes first!")
-        print('')
         return user_board.computer_turn_place_hit()
-    play = coin_toss(user_board, computer_board)
-    play()
+    play_game = coin_toss(user_board, computer_board)
+    play_game()
 
 def start_game():
     '''
@@ -270,9 +277,6 @@ def start_game():
     coin_toss(user_board, computer_board)
     computer_board.iterate_user_score()
     user_board.iterate_computer_score()
-
-    return user_board
-    return computer_board
 
 def end_game():
     '''
