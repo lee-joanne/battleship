@@ -71,15 +71,18 @@ class GameBoard:
         self.board_array = np.array(self.board)
         self.user_score = 0
         self.computer_score = 0
+        self.column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
 
     def display_board(self):
         '''
         Will display the board to the user.
         '''
-        print("The board")
-        for row in self.board:
+        print(f"\n {self.name}'s board:\n")
+        for row in self.board_array:
             joint_row = "  ".join(row)
             print(f"{joint_row}\n")
+
+        return joint_row
 
     def randomize_ship_coordinates(self):
         '''
@@ -138,6 +141,38 @@ class GameBoard:
                 break
         return x_coord
 
+    def ask_user_start(self):
+        '''
+        Function will ask user if they wish to place their own ships.
+        If n, ship coordinates will be randomized.
+        If yes, function will run to ask user to input desired coordinates."
+        '''
+        print('')
+        while True:
+            user_answer = input("Would you like to place the ships yourself? y or n?:\n").lower()
+            if user_answer == 'y':
+                user_board.user_choose_ship_placement()
+                break
+            elif user_answer == 'n':
+                user_board.randomize_ship_coordinates()
+                break
+            else:
+                print("You must type either 'y' or 'n'!")
+    
+    def user_choose_ship_placement(self):
+        '''
+        Function will allow the user to type in their own
+        desired coordinates.
+        '''
+        print(user_board.board_array)
+        ship_count = 0
+        while ship_count < 5:
+            y = self.column_map[input("Choose your y coordinate (from A to E):\n").upper()]
+            x = int(input("Choose your x coordinates (from 1 to 5:\n"))
+            self.board_array[y, x] = '|O|'
+            ship_count += 1
+        print(user_board.board_array)
+
     def user_turn_place_hit(self):
         '''
         Function will allow user to type in coordinates
@@ -147,8 +182,7 @@ class GameBoard:
         user misses and calls computer's turn.
         Allows user to play again if hit.
         '''
-        column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
-        y_coord = column_map[self.validate_y_coordinate()]
+        y_coord = self.column_map[self.validate_y_coordinate()]
         x_coord = int(self.validate_x_coordinate())
         if self.board_array[x_coord, y_coord] == '|O|':
             self.board_array[x_coord, y_coord] = '|X|'
@@ -273,8 +307,8 @@ def start_game():
     user_board = GameBoard("name=user")
     computer_board = GameBoard("name=computer")
     #user_board.display_board()
-    user_board.randomize_ship_coordinates()
     computer_board.randomize_ship_coordinates()
+    user_board.ask_user_start()
     coin_toss(user_board, computer_board)
     computer_board.iterate_user_score()
     user_board.iterate_computer_score()
