@@ -23,6 +23,7 @@ def introduce_game():
     print('')
     print('-' * 80)
     print('')
+    global user_name
     user_name = input("Ahoy matey! Please enter your pirate name:\n")
     print('')
     print(f"Welcome aboard Pirate {user_name}!")
@@ -37,7 +38,7 @@ def ask_user_ready():
     Loops the response if invalid response is given.
     '''
     while True:
-        confirmation_response = input("aye or nay?\n")
+        confirmation_response = input("aye or nay?\n").lower()
 
         if confirmation_response == 'aye':
             start_game()
@@ -142,13 +143,13 @@ class GameBoard:
         column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
         y_coord = column_map[self.validate_y_coordinate()]
         x_coord = int(self.validate_x_coordinate())
-        user_score_counter = 0
+        hit = 0
         if self.board_array[x_coord, y_coord] == '|O|':
             self.board_array[x_coord, y_coord] = '|X|'
             print('')
-            print('You hit a battleship! Great job!')
+            print(f'You hit a battleship! Great job Pirate {user_name}!')
             print('')
-            user_score_counter += 1
+            hit = 1
         elif self.board_array[x_coord, y_coord] == '|X|':
             print("You already hit here! Try again!")
         elif self.board_array[x_coord, y_coord] == '|-|':
@@ -160,7 +161,7 @@ class GameBoard:
             print('')
         print(self.board_array)
 
-        return user_score_counter
+        return hit
 
     def computer_turn_place_hit(self):
         '''
@@ -181,27 +182,64 @@ class GameBoard:
             print('Oh no! The enemy has hit a ship!')
             computer_score_counter += 1
             print('')
-        else: 
+        else:
             self.board_array[x_target, y_target] = '|-|'
             print('')
             print("The enemy missed!")
-            print('')   
+            print('')
         print(self.board_array)
         return computer_score_counter
 
-    def progress_game(self):
+    def iterate_user_score(self):
         '''
         Function allow the keep to continuously run until
-        computer or user scores 5 points. Function will
+        user scores 5 points. Function will
         keep track of incrementing score.
         '''
-        user_score = self.user_turn_place_hit()
-        computer_score = self.computer_turn_place_hit()
-        while(user_score) < 5:
-            self.user_turn_place_hit()
+        hit = self.user_turn_place_hit()
+        user_score = hit
 
-        while(computer_score) <5:
+        while(user_score) < 7:
+            self.user_turn_place_hit()
+            user_score += 1
+            if (user_score) == 5:
+                self.user_wins()
+
+    def iterate_computer_score(self):
+        '''
+        Function allow the keep to continuously run until
+        computer scores 5 points. Function will
+        keep track of incrementing score.
+        '''
+        hit = self.computer_turn_place_hit()
+        computer_score = hit
+
+        while(computer_score) < 7:
             self.computer_turn_place_hit()
+            computer_score += 1
+            if (computer_score) == 5:
+                self.computer_wins()
+    
+    def user_wins(self):
+        '''
+        Function will congratulate user for winning when
+        user score reaches 5 points.
+        '''
+        print('')
+        print(f"Congratulations Pirate {user_name} You have beat the enemy!")
+        print("We have claimed back our beloved treasure! Great job!")
+        print("To play again, hit the 'Run Program' button at the top!")
+
+    def computer_wins(self):
+        '''
+        Function will let user know they have lost the game
+        when computer reaches 5 points.
+        '''
+        print('')
+        print(f"Oh no Pirate {user_name}, the enemy has won...")
+        print("Our beloved treasure has been claimed back and our ships sunk.")
+        print("Better luck next time.")
+        print("To play again, click 'Run Program' at the top!")
 
 def start_game():
     '''
@@ -214,7 +252,7 @@ def start_game():
     computer_board.randomize_ship_coordinates()
     computer_board.user_turn_place_hit()
     user_board.computer_turn_place_hit()
-    computer_board.progress_game()
+    computer_board.iterate_user_score()
 
     return user_board
 
