@@ -363,6 +363,7 @@ def end_game():
     When user chooses to end game, will create a goodbye message
     and give instructions to let the user know how to reactive the game.
     '''
+    print('')
     print("Goodbye! To play again, please click 'Run Program'!")
 
 
