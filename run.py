@@ -82,7 +82,8 @@ class GameBoard:
     # https://github.com/Damianjacob/MS3-Battleship-Game
     def display_board(self):
         '''
-        Will display the board to the user.
+        Will display the board to the user with respective
+        labels on top.
         '''
         if self.name == computer_board.name:
             print("\nEnemy Board\n")
@@ -246,7 +247,8 @@ class GameBoard:
                 break
         self.display_board()
         user_board.computer_turn_place_hit()
-
+        
+        
     def computer_turn_place_hit(self):
         '''
         When it is the computer's turn, automatically will
@@ -267,6 +269,7 @@ class GameBoard:
                 print('')
                 print('Oh no! The enemy has hit a ship!')
                 self.computer_score += 1
+                print("computer score increases")
                 print('')
                 break
             else:
@@ -281,29 +284,41 @@ class GameBoard:
         print('')
         computer_board.display_board()
 
+
     def iterate_user_score(self):
-        '''
-        Function allow the keep to continuously run until
-        user scores 5 points. Function will
-        keep track of incrementing score.
-        '''
+        while True:
+            computer_board.user_turn_place_hit()
+            if (computer_board.user_score) == 5:
+                computer_board.user_wins()
+                break
+            elif (user_board.computer_score) == 5:
+                user_board.computer_wins()
+                break
+            else:
+                pass
+    #     '''
+    #     Function allow the keep to continuously run until
+    #     user scores 5 points. Function will
+    #     keep track of incrementing score.
+    #     '''
 
-        while(self.user_score) < 6:
-            self.user_turn_place_hit()
-            if (self.user_score) == 5:
-                self.user_wins()
+    #     while(self.user_score) < 6:
+    #         self.user_turn_place_hit()
+    #         if (self.user_score) == 5:
+    #             self.user_wins()
 
-    def iterate_computer_score(self):
-        '''
-        Function allow the keep to continuously run until
-        computer scores 5 points. Function will
-        keep track of incrementing score.
-        '''
+    # def iterate_computer_score(self):
+    #     '''
+    #     Function allow the keep to continuously run until
+    #     computer scores 5 points. Function will
+    #     keep track of incrementing score.
+    #     '''
 
-        while(self.computer_score) < 6:
-            self.computer_turn_place_hit()
-            if (self.computer_score) == 2:
-                self.computer_wins()
+    #     while(self.computer_score) < 6:
+    #         print("computer score less than 5")
+    #         self.computer_turn_place_hit()
+    #         if (self.computer_score) == 2:
+    #           self.computer_wins()
 
     def user_wins(self):
         '''
@@ -359,7 +374,7 @@ def start_game():
     computer_board = GameBoard("name=computer")
     user_board.ask_user_start()
     computer_board.iterate_user_score()
-    user_board.iterate_computer_score()
+    # user_board.iterate_computer_score()
 
 
 def end_game():
