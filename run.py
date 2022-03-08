@@ -182,7 +182,7 @@ class GameBoard:
         ship_count = 0
         while ship_count < 5:
             while True:
-                y = self.column_map[input("Choose letter (A to E):\n").upper()]
+                y = input("Choose letter (A to E):\n").upper()
                 x = int(input("Choose number (1 to 5):\n"))
                 y_lst = ['A', 'B', 'C', 'D', 'E']
                 x_lst = [1, 2, 3, 4, 5]
@@ -192,6 +192,7 @@ class GameBoard:
                     print("You must select a number from 1 to 5!")
                 else:
                     break
+            y = self.column_map[y]
             self.board_array[x, y] = '|O|'
             ship_count += 1
             user_board.display_board()
@@ -199,20 +200,9 @@ class GameBoard:
                 print('')
                 print('Great job placing the ships!')
                 print('')
-                print(f"Are you happy with the ships, Pirate {user_name}?")
-                user_answer = input('y or n:\n').lower()
-                if user_answer == 'y':
-                    print('')
-                    user_board.display_board()
-                    computer_board.randomize_ship_coordinates()
-                    coin_toss(user_board, computer_board)
-                    break
-                elif user_answer == 'n':
-                    continue
-                else:
-                    print('')
-                    print("You must type either 'y' or 'n'!")
-                    print('')
+                user_board.display_board()
+                computer_board.randomize_ship_coordinates()
+                coin_toss(user_board, computer_board)
 
     def user_turn_place_hit(self):
         '''
@@ -224,6 +214,10 @@ class GameBoard:
         Allows user to play again   if hit.
         '''
         while True:
+            print('')
+            print("Take a hit at the enemy's board!")
+            print('')
+            computer_board.display_board()
             y_coord = self.column_map[self.validate_y_coordinate()]
             x_coord = int(self.validate_x_coordinate())
             if self.board_array[x_coord, y_coord] == '|O|':
@@ -247,8 +241,7 @@ class GameBoard:
                 break
         self.display_board()
         user_board.computer_turn_place_hit()
-        
-        
+
     def computer_turn_place_hit(self):
         '''
         When it is the computer's turn, automatically will
@@ -269,7 +262,6 @@ class GameBoard:
                 print('')
                 print('Oh no! The enemy has hit a ship!')
                 self.computer_score += 1
-                print("computer score increases")
                 print('')
                 break
             else:
@@ -279,13 +271,13 @@ class GameBoard:
                 print('')
                 break
         self.display_board()
-        print('')
-        print("Take a hit at the enemy's board!")
-        print('')
-        computer_board.display_board()
 
-
-    def iterate_user_score(self):
+    def progress_game(self):
+        '''
+        Function will run in a while loop to continously
+        play game back and forth until user or
+        computer reaches a score of 5.
+        '''
         while True:
             computer_board.user_turn_place_hit()
             if (computer_board.user_score) == 5:
@@ -296,29 +288,6 @@ class GameBoard:
                 break
             else:
                 pass
-    #     '''
-    #     Function allow the keep to continuously run until
-    #     user scores 5 points. Function will
-    #     keep track of incrementing score.
-    #     '''
-
-    #     while(self.user_score) < 6:
-    #         self.user_turn_place_hit()
-    #         if (self.user_score) == 5:
-    #             self.user_wins()
-
-    # def iterate_computer_score(self):
-    #     '''
-    #     Function allow the keep to continuously run until
-    #     computer scores 5 points. Function will
-    #     keep track of incrementing score.
-    #     '''
-
-    #     while(self.computer_score) < 6:
-    #         print("computer score less than 5")
-    #         self.computer_turn_place_hit()
-    #         if (self.computer_score) == 2:
-    #           self.computer_wins()
 
     def user_wins(self):
         '''
@@ -373,7 +342,7 @@ def start_game():
     user_board = GameBoard("name=user")
     computer_board = GameBoard("name=computer")
     user_board.ask_user_start()
-    computer_board.iterate_user_score()
+    computer_board.progress_game()
     # user_board.iterate_computer_score()
 
 
