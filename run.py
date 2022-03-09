@@ -41,7 +41,8 @@ def introduce_game():
 def ask_user_ready():
     '''
     Asks the user if they are ready to play the game or not.
-    Loops the response if invalid response is given.
+    Loops the response until valid response is given, either
+    'aye' or 'nay' must be written.
     '''
     while True:
         confirmation_response = input("aye or nay?\n").lower()
@@ -82,11 +83,12 @@ class GameBoard:
     # https://github.com/Damianjacob/MS3-Battleship-Game
     def display_board(self):
         '''
-        Will display the board to the user with respective
-        labels on top.
+        Will display the user board and computer board
+        to the user. Labels will be shown above to 
+        distinguish whose board belongs to who.
         '''
         if self.name == computer_board.name:
-            print("\nEnemy Board\n")
+            print("\nEnemy's Board\n")
         else:
             print(f"\n {user_name}'s Board:\n")
         for row in self.board_array:
@@ -112,7 +114,7 @@ class GameBoard:
     def validate_y_coordinate(self):
         '''
         Function will validate whether input from user
-        is a letter ranging from a to e, or else will
+        is a letter ranging from A to E, or else will
         return ValueError message.
         '''
         while True:
@@ -154,7 +156,7 @@ class GameBoard:
         '''
         Function will ask user if they wish to place their own ships.
         If n, ship coordinates will be randomized.
-        If yes, function will run to ask user to input desired coordinates."
+        If yes, function will run to ask user to input desired coordinates.
         '''
         print('')
         while True:
@@ -175,40 +177,54 @@ class GameBoard:
 
     def user_choose_ship_placement(self):
         '''
-        Function will allow the user to type in their own
-        desired coordinates.
+        Function will allow user to input their own desired
+        coordinates. Validations will run first to see if user
+        types in a letter coordinate from A to E. Next, validation
+        will run to see if user types in a number from 1 to 5.
+        Each time a new ship is made, the user board will be displayed.
+        Next, another validation will check to see if user is typing
+        in a unique coordinate and if user types in a redundant
+        coordinate, message will show to user to try again.
+        When all five ships are placed, board will be displayed
+        and coin toss will run to see who goes first.
         '''
         user_board.display_board()
         ship_count = 0
         while ship_count < 5:
             while True:
-                try:
-                    y = input("Choose letter (A to E):\n").upper()
+                while True:
+                    try:
+                        y = input("Choose letter (A to E):\n").upper()
+                        print('')
+                        y_lst = ['A', 'B', 'C', 'D', 'E']
+                        if y not in y_lst:
+                            raise ValueError(
+                                "You must select a letter from A to E!")
+                    except ValueError as e:
+                        print(f"Invalid data: {e}, please try again.\n")
+                        continue
+                    else:
+                        break
+                while True:
+                    try:
+                        x = input("Choose number (1 to 5):\n")
+                        print('')
+                        x_lst = ['1', '2', '3', '4', '5']
+                        if x not in x_lst:
+                            raise ValueError(
+                                "You must select a number from 1 to 5!")
+                    except ValueError as e:
+                        print(f"Invalid data: {e}, please try again.\n")
+                        continue
+                    else:
+                        break
+                y = self.column_map[y]
+                x = int(x)
+                if self.board_array[x, y] == '|O|':
+                    print("You already have a ship here! Try again!")
                     print('')
-                    y_lst = ['A', 'B', 'C', 'D', 'E']
-                    if y not in y_lst:
-                        raise ValueError(
-                            "You must select a letter from A to E!")
-                except ValueError as e:
-                    print(f"Invalid data: {e}, please try again.\n")
-                    continue
                 else:
                     break
-            while True:
-                try:
-                    x = input("Choose number (1 to 5):\n")
-                    print('')
-                    x_lst = ['1', '2', '3', '4', '5']
-                    if x not in x_lst:
-                        raise ValueError(
-                            "You must select a number from 1 to 5!")
-                except ValueError as e:
-                    print(f"Invalid data: {e}, please try again.\n")
-                    continue
-                else:
-                    break
-            y = self.column_map[y]
-            x = int(x)
             self.board_array[x, y] = '|O|'
             ship_count += 1
             user_board.display_board()
@@ -225,9 +241,11 @@ class GameBoard:
         Function will allow user to type in coordinates
         to place hit.
         Will give message back to user depending on
-        hit or miss. Increments miss_count if
-        user misses and calls computer's turn.
-        Allows user to play again   if hit.
+        if the user misses or hits the computer ships.
+        Will run validation checks whether user types in a unique
+        coordinate or redundant coordinate. Will display the board
+        to the user when coordinates are accepted. If user score
+        is below 5, will allow the computer to go next. 
         '''
         while True:
             print('')
@@ -263,7 +281,10 @@ class GameBoard:
         '''
         When it is the computer's turn, automatically will
         generate a coordinate and direct a hit at the
-        user board.
+        user board. Message will show whether the
+        enemy has correctly hit the user's ship or
+        missed. Will display the user's board back to 
+        the user. 
         '''
         print('')
         print("Enemy's turn...")
@@ -350,6 +371,8 @@ def coin_toss(user_board, computer_board):
 def start_game():
     '''
     Function will start the game when user confirms game start.
+    User board and computer board names are defined to the
+    GameBoard class.
     '''
     global user_board
     global computer_board
@@ -361,8 +384,9 @@ def start_game():
 
 def end_game():
     '''
-    When user chooses to end game, will create a goodbye message
-    and give instructions to let the user know how to reactive the game.
+    When user chooses to end game after saying 'nay', will 
+    create a goodbye message and give instructions to let the 
+    user know how to reactive the game.
     '''
     print('')
     print("Goodbye! To play again, please click 'Run Program'!")
@@ -370,7 +394,8 @@ def end_game():
 
 def main():
     '''
-    Main code to execute the entire Python script
+    Main code to execute the entire game. Will introduce the game and
+    ask the user if they are ready to play.
     '''
     introduce_game()
     ask_user_ready()
