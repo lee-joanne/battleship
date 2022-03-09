@@ -1,18 +1,17 @@
 import random
 import numpy as np
 
-instructions = """There is trouble...The enemies stole our treasure!
-They are scattered across the Black Sea.
+user_instructions = """There is trouble...The enemy stole our treasure!
+The enemy has five ships scattered across the Black Sea.
 We must shoot our cannons and try to take their ships down.
 They have cannons of their own so they will try to hit one of our ships too!
 The sea board contains five by five squares in x,y coordinates.
 You must guess the coordinates to take down their ships.
-The first to destroy all ships wins the rum and treasure!
-Us and the enemies both have a total of 5 ships to take down.
+The first to destroy all 5 ships wins the treasure!
 
 On your grid, your ships are marked as '|O|'. If a ship is
 hit, it will be marked as '|X|'. If it's a miss, it will be marked
-as '|-|'."""
+as '|-|'. A coin toss will be done to see who gets to shoot first."""
 
 
 def introduce_game():
@@ -32,7 +31,7 @@ def introduce_game():
     user_name = input("Ahoy matey! Please enter your pirate name:\n")
     print('')
     print(f"Welcome aboard Pirate {user_name}!")
-    print(instructions)
+    print(user_instructions)
     print('')
     print(f"Are you ready, Pirate {user_name}?")
     print('')
@@ -100,15 +99,15 @@ class GameBoard:
         Function will randomly create coordinates on where to place the ships.
         Function will place the ships, marked as |O|.
         '''
-        count = 0
-        while count < 5:
+        ship_count = 0
+        while ship_count < 5:
             column = random.randint(1, 5)
             row = random.randint(1, 5)
             if self.board_array[row, column] == '|O|':
                 continue
             else:
                 self.board_array[row, column] = '|O|'
-                count += 1
+                ship_count += 1
         self.display_board()
 
     def validate_y_coordinate(self):
@@ -121,8 +120,8 @@ class GameBoard:
             try:
                 print('')
                 y_choice = input("Input letter coordinate (A to E):\n").upper()
-                y_lst = ['A', 'B', 'C', 'D', 'E']
-                if y_choice not in y_lst:
+                y_list = ['A', 'B', 'C', 'D', 'E']
+                if y_choice not in y_list:
                     raise ValueError(
                         "Value must be a letter from A to E!")
             except ValueError as e:
@@ -140,9 +139,9 @@ class GameBoard:
         '''
         while True:
             try:
-                x_coord = (input("Input number coordinate (1 to 5):\n"))
-                x_lst = ["1", "2", "3", "4", "5"]
-                if x_coord not in x_lst:
+                x_choice = (input("Input number coordinate (1 to 5):\n"))
+                x_list = ["1", "2", "3", "4", "5"]
+                if x_choice not in x_list:
                     raise ValueError(
                         "Value must be a number between 1 to 5!")
             except ValueError as e:
@@ -150,7 +149,7 @@ class GameBoard:
                 continue
             else:
                 break
-        return x_coord
+        return x_choice
 
     def ask_user_start(self):
         '''
@@ -189,15 +188,15 @@ class GameBoard:
         and coin toss will run to see who goes first.
         '''
         user_board.display_board()
-        ship_count = 0
-        while ship_count < 5:
+        added_ship_count = 0
+        while added_ship_count < 5:
             while True:
                 while True:
                     try:
-                        y = input("Choose letter (A to E):\n").upper()
+                        y_input = input("Choose letter (A to E):\n").upper()
                         print('')
-                        y_lst = ['A', 'B', 'C', 'D', 'E']
-                        if y not in y_lst:
+                        y_list = ['A', 'B', 'C', 'D', 'E']
+                        if y_input not in y_list:
                             raise ValueError(
                                 "You must select a letter from A to E!")
                     except ValueError as e:
@@ -207,10 +206,10 @@ class GameBoard:
                         break
                 while True:
                     try:
-                        x = input("Choose number (1 to 5):\n")
+                        x_input = input("Choose number (1 to 5):\n")
                         print('')
-                        x_lst = ['1', '2', '3', '4', '5']
-                        if x not in x_lst:
+                        x_list = ['1', '2', '3', '4', '5']
+                        if x_input not in x_list:
                             raise ValueError(
                                 "You must select a number from 1 to 5!")
                     except ValueError as e:
@@ -218,17 +217,17 @@ class GameBoard:
                         continue
                     else:
                         break
-                y = self.column_map[y]
-                x = int(x)
-                if self.board_array[x, y] == '|O|':
+                y_input = self.column_map[y_input]
+                x_input = int(x_input)
+                if self.board_array[x_input, y_input] == '|O|':
                     print("You already have a ship here! Try again!")
                     print('')
                 else:
                     break
-            self.board_array[x, y] = '|O|'
-            ship_count += 1
+            self.board_array[x_input, y_input] = '|O|'
+            added_ship_count += 1
             user_board.display_board()
-            if ship_count == 5:
+            if added_ship_count == 5:
                 print('')
                 print('Great job placing the ships!')
                 print('')
@@ -344,7 +343,7 @@ class GameBoard:
         '''
         print('')
         print(f"Oh no Pirate {user_name}, the enemy has won...")
-        print("Our beloved treasure has been claimed back and our ships sunk.")
+        print("We will never be able to take back our treasure.")
         print("Better luck next time.")
         print("To play again, click 'Run Program' at the top!")
 
