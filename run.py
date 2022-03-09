@@ -18,6 +18,8 @@ def introduce_game():
     '''
     Initial message to introduce title of the game.
     Input will appear for user to type in their name.
+    While loop will ensure that user does not leave
+    their name input empty.
     Paragraph will appear to explain rules of the game
     and ask user if they wish to continue.
     '''
@@ -28,8 +30,14 @@ def introduce_game():
     print('-' * 80)
     print('')
     global user_name
-    user_name = input("Ahoy matey! Please enter your pirate name:\n")
-    print('')
+    while True:
+        user_name = input("Ahoy matey! Please enter your pirate name:\n")
+        print('')
+        if user_name == '':
+            print("Please enter a name!")
+            print('')
+        else:
+            break
     print(f"Welcome aboard Pirate {user_name}!")
     print(user_instructions)
     print('')
@@ -65,6 +73,8 @@ class GameBoard:
 
     def __init__(self, name):
         self.name = name
+        # Code credit on self.board layout goes to Damian Jacob
+        # https://github.com/Damianjacob/MS3-Battleship-Game
         self.board = [
             [" ",  " A", "  B", "  C", "  D", "  E"],
             ["1", "| |", "| |", "| |", "| |", "| |"],
@@ -83,7 +93,7 @@ class GameBoard:
     def display_board(self):
         '''
         Will display the user board and computer board
-        to the user. Labels will be shown above to 
+        to the user. Labels will be shown above to
         distinguish whose board belongs to who.
         '''
         if self.name == computer_board.name:
@@ -244,7 +254,7 @@ class GameBoard:
         Will run validation checks whether user types in a unique
         coordinate or redundant coordinate. Will display the board
         to the user when coordinates are accepted. If user score
-        is below 5, will allow the computer to go next. 
+        is below 5, will allow the computer to go next.
         '''
         while True:
             print('')
@@ -282,8 +292,8 @@ class GameBoard:
         generate a coordinate and direct a hit at the
         user board. Message will show whether the
         enemy has correctly hit the user's ship or
-        missed. Will display the user's board back to 
-        the user. 
+        missed. Will display the user's board back to
+        the user.
         '''
         print('')
         print("Enemy's turn...")
@@ -383,8 +393,8 @@ def start_game():
 
 def end_game():
     '''
-    When user chooses to end game after saying 'nay', will 
-    create a goodbye message and give instructions to let the 
+    When user chooses to end game after saying 'nay', will
+    create a goodbye message and give instructions to let the
     user know how to reactive the game.
     '''
     print('')
