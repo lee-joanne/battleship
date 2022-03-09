@@ -19,7 +19,7 @@ def introduce_game():
     Initial message to introduce title of the game.
     Input will appear for user to type in their name.
     While loop will ensure that user does not leave
-    their name input empty.
+    the name input empty.
     Paragraph will appear to explain rules of the game
     and ask user if they wish to continue.
     '''
@@ -68,7 +68,11 @@ def ask_user_ready():
 
 class GameBoard:
     '''
-    Creates the game boards class used in the Pirate Ship game.
+    Main board class for the game. Sets the names for the game
+    (user and computer), board layout, board array using
+    Numpy, sets the user score and computer score
+    at 0, and the column map to convert the letter
+    coordinates to numbers.
     '''
 
     def __init__(self, name):
@@ -165,7 +169,9 @@ class GameBoard:
         '''
         Function will ask user if they wish to place their own ships.
         If n, ship coordinates will be randomized.
-        If yes, function will run to ask user to input desired coordinates.
+        If y, function will run function to place ships.
+        Function will validate that user types either
+        'y' or 'n'.
         '''
         print('')
         while True:
@@ -190,12 +196,12 @@ class GameBoard:
         coordinates. Validations will run first to see if user
         types in a letter coordinate from A to E. Next, validation
         will run to see if user types in a number from 1 to 5.
-        Each time a new ship is made, the user board will be displayed.
+        Each time a new ship is placed, the user board will be displayed.
         Next, another validation will check to see if user is typing
         in a unique coordinate and if user types in a redundant
         coordinate, message will show to user to try again.
         When all five ships are placed, board will be displayed
-        and coin toss will run to see who goes first.
+        and coin toss function will run.
         '''
         user_board.display_board()
         added_ship_count = 0
@@ -293,7 +299,7 @@ class GameBoard:
         user board. Message will show whether the
         enemy has correctly hit the user's ship or
         missed. Will display the user's board back to
-        the user.
+        the user after attack is placed.
         '''
         print('')
         print("Enemy's turn...")
