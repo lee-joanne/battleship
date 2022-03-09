@@ -122,7 +122,7 @@ class GameBoard:
                 y_lst = ['A', 'B', 'C', 'D', 'E']
                 if y_choice not in y_lst:
                     raise ValueError(
-                        "Value must be a capital letter from A to E!")
+                        "Value must be a letter from A to E!")
             except ValueError as e:
                 print(f"Invalid data: {e}, please try again.\n")
                 continue
@@ -142,7 +142,7 @@ class GameBoard:
                 x_lst = ["1", "2", "3", "4", "5"]
                 if x_coord not in x_lst:
                     raise ValueError(
-                        "Value must be a letter between 1 to 5!")
+                        "Value must be a number between 1 to 5!")
             except ValueError as e:
                 print(f"Invalid data: {e}, please try again.\n")
                 continue
@@ -256,7 +256,8 @@ class GameBoard:
                 print('')
                 break
         self.display_board()
-        user_board.computer_turn_place_hit()
+        if self.user_score < 5:
+            user_board.computer_turn_place_hit()
 
     def computer_turn_place_hit(self):
         '''
