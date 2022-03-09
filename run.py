@@ -182,17 +182,33 @@ class GameBoard:
         ship_count = 0
         while ship_count < 5:
             while True:
-                y = input("Choose letter (A to E):\n").upper()
-                x = int(input("Choose number (1 to 5):\n"))
-                y_lst = ['A', 'B', 'C', 'D', 'E']
-                x_lst = [1, 2, 3, 4, 5]
-                if y not in y_lst:
-                    print("You must select a letter from A to E!")
-                elif x not in x_lst:
-                    print("You must select a number from 1 to 5!")
+                try:
+                    y = input("Choose letter (A to E):\n").upper()
+                    print('')
+                    y_lst = ['A', 'B', 'C', 'D', 'E']
+                    if y not in y_lst:
+                        raise ValueError(
+                            "You must select a letter from A to E!")
+                except ValueError as e:
+                    print(f"Invalid data: {e}, please try again.\n")
+                    continue
+                else:
+                    break
+            while True:
+                try:
+                    x = input("Choose number (1 to 5):\n")
+                    print('')
+                    x_lst = ['1', '2', '3', '4', '5']
+                    if x not in x_lst:
+                        raise ValueError(
+                            "You must select a number from 1 to 5!")
+                except ValueError as e:
+                    print(f"Invalid data: {e}, please try again.\n")
+                    continue
                 else:
                     break
             y = self.column_map[y]
+            x = int(x)
             self.board_array[x, y] = '|O|'
             ship_count += 1
             user_board.display_board()
