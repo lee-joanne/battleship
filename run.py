@@ -338,9 +338,6 @@ def coin_toss(user_board, computer_board):
     if random.randint(1, 100) % 2 == 0:
         print("You won the coin toss! You go first.")
         print('')
-        print("Take a hit at the enemy's board!")
-        print('')
-        computer_board.display_board()
         return computer_board.user_turn_place_hit()
     else:
         print("You lost the coin toss, computer goes first!")
