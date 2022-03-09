@@ -357,7 +357,6 @@ def start_game():
     computer_board = GameBoard("name=computer")
     user_board.ask_user_start()
     computer_board.progress_game()
-    # user_board.iterate_computer_score()
 
 
 def end_game():
