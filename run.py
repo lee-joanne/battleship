@@ -104,7 +104,7 @@ class GameBoard:
         for row in user_board.board_array:
             joint_row = "  ".join(row)
             print(f"{joint_row}\n")
-    
+
     def display_computer_board(self):
         '''
         Will display the empty computer board
