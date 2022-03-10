@@ -10,29 +10,29 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ### User Stories
 
-    - First Time Visitor Goals
+- First Time Visitor Goals
 
-        1. As a First Time User, I want to fully understand what this game is called. I can see at the very beginning, the game is called Pirate Ship and seems to
-        talk back to me with a pirate tone of voice to make it more fun.
+    1. As a First Time User, I want to fully understand what this game is called. I can see at the very beginning, the game is called Pirate Ship and seems to
+    talk back to me with a pirate tone of voice to make it more fun.
 
-        2. As a First Time User, I want to understand how to play the game. After typing in my name to the game, the game responds with my name which is nice to personalize the game, and gives me a very thorough explanation on how to play the game. I know exactly what is expected of me, what I need to achieve in this game, and how I can achieve it. The game also explains the different labels I will expect to see on the board, what |X|, |O|, and |-| are. 
+    2. As a First Time User, I want to understand how to play the game. After typing in my name to the game, the game responds with my name which is nice to personalize the game, and gives me a very thorough explanation on how to play the game. I know exactly what is expected of me, what I need to achieve in this game, and how I can achieve it. The game also explains the different labels I will expect to see on the board, what |X|, |O|, and |-| are. 
 
-        3. As a First Time User, I want the choice to be able to either place my own ships or have my ships randomized. After seeing the description of the game, the game allows me to choose. If I choose to place my own ships, the game shows me the updated board each time I put in a new ship. Each time I accidentally put in a ship where I have already put one, the game lets me know and allows me to try again. If I choose to have the board randomized, my boards will be randomized and the game will start. I can clearly see where all of my ships are placed on the randomized board.
+    3. As a First Time User, I want the choice to be able to either place my own ships or have my ships randomized. After seeing the description of the game, the game allows me to choose. If I choose to place my own ships, the game shows me the updated board each time I put in a new ship. Each time I accidentally put in a ship where I have already put one, the game lets me know and allows me to try again. If I choose to have the board randomized, my boards will be randomized and the game will start. I can clearly see where all of my ships are placed on the randomized board.
 
-        4. As a First Time User, I want feedback on whether I have hit the computer ships or if the computer ship has hit mine. The game is very thorough in communicating with me whether my ship or the computer's ship has been hit and always shows me an updated view of the board after every turn. The game is
-        very communicative with me when I accidentally put in incorrect or invalid coordinates and allows me to try again until I put in a correct value.
+    4. As a First Time User, I want feedback on whether I have hit the computer ships or if the computer ship has hit mine. The game is very thorough in communicating with me whether my ship or the computer's ship has been hit and always shows me an updated view of the board after every turn. The game is
+    very communicative with me when I accidentally put in incorrect or invalid coordinates and allows me to try again until I put in a correct value.
 
-        5. As a First Time User, I want to know the outcome at the end of the game and to be communicated with if I have lost or won the game. At the end of the game, the game tells me if I have lost or won and gives me an appropriate message for each occassion.
+    5. As a First Time User, I want to know the outcome at the end of the game and to be communicated with if I have lost or won the game. At the end of the game, the game tells me if I have lost or won and gives me an appropriate message for each occassion.
 
-    - Returning / Frequent Visitor Goals
+- Returning / Frequent Visitor Goals
 
-        1. As a Returning / Frequent Visitor, I want to be able to play the game again and have the board reshuffled. When I finish playing the game or each time I run the program, the board is reshuffled which makes the game start again from scratch.
+    1. As a Returning / Frequent Visitor, I want to be able to play the game again and have the board reshuffled. When I finish playing the game or each time I run the program, the board is reshuffled which makes the game start again from scratch.
 
 ### Flowchart
 
-    - Flowchart has been created using the program Whimsical.
+- Flowchart has been created using the program Whimsical.
 
-    -  Flowchart - [View](assets/documentation/whimsical_map.png)
+-  Flowchart - [View](assets/documentation/whimsical_map.png)
 
 ## How To Play
 
@@ -248,21 +248,21 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ### Bugs:
 
-    - There have been many bugs while creating this game, a list of the main bugs encountered:
+- There have been many bugs while creating this game, a list of the main bugs encountered:
 
-        - First bug was being unable to hide the computer's ships from the user. There was one function to display the board by inputting both the user and computer names into the GameBoard class. The randomize_ship_coordinates function would also produce randomized coordinates and previewed both ships to the user. After getting help from Tutor Support, I was able to create two separate functions to display the ships, one for the computer's ships (empty board) and one for the user's ships. In the user_turn_place_hit function, I was able to target the computer's ships based on the real computer board ship placement and the empty displayed computer board will preview whether the user has missed or not. 
+    - First bug was being unable to hide the computer's ships from the user. There was one function to display the board by inputting both the user and computer names into the GameBoard class. The randomize_ship_coordinates function would also produce randomized coordinates and previewed both ships to the user. After getting help from Tutor Support, I was able to create two separate functions to display the ships, one for the computer's ships (empty board) and one for the user's ships. In the user_turn_place_hit function, I was able to target the computer's ships based on the real computer board ship placement and the empty displayed computer board will preview whether the user has missed or not. 
 
-        - I was facing many problems of having my Python lines too long, whether it be from long print statements, long variable names, or long docstrings. The longest string I had was the introduction of the game. I managed to fix the issue of having the introduction of the game too long by creating the variable, 'introduction', and having the string assigned to it. I, then, printed this variable in the introduce_game function. For the docstrings, I managed to make multiple lines for my docstrings to ensure they do not exceed Python's limit. As well, I have tried to shorten variable names to make them short, but still comprehensive.
+    - I was facing many problems of having my Python lines too long, whether it be from long print statements, long variable names, or long docstrings. The longest string I had was the introduction of the game. I managed to fix the issue of having the introduction of the game too long by creating the variable, 'introduction', and having the string assigned to it. I, then, printed this variable in the introduce_game function. For the docstrings, I managed to make multiple lines for my docstrings to ensure they do not exceed Python's limit. As well, I have tried to shorten variable names to make them short, but still comprehensive.
 
-        - The user_choose_ship_placement was difficult because there were many validation checks that were required, such as ensuring the user types in a letter coordinate from A to E, a number coordinate from 1 to 5, and ensuring that the user does not put in a redundant ship. It was difficult to ensure that for each invalid value, the game will correctly allow the user to repeat where required (if invalid letter coordinate, will allow the user to put in another letter coordinate. For number, it needs to allow the user to re-enter the number but also still keep the previously accepted letter coordinate. For redundant coordinate, the game needed to allow the user to try again from the start of inputting a letter coordinate). I managed to fix this with nested while loops, and strategically placed the while loops where necessary to ensure that the game will appropriately give the correct prompts and messages to the user. 
+    - The user_choose_ship_placement was difficult because there were many validation checks that were required, such as ensuring the user types in a letter coordinate from A to E, a number coordinate from 1 to 5, and ensuring that the user does not put in a redundant ship. It was difficult to ensure that for each invalid value, the game will correctly allow the user to repeat where required (if invalid letter coordinate, will allow the user to put in another letter coordinate. For number, it needs to allow the user to re-enter the number but also still keep the previously accepted letter coordinate. For redundant coordinate, the game needed to allow the user to try again from the start of inputting a letter coordinate). I managed to fix this with nested while loops, and strategically placed the while loops where necessary to ensure that the game will appropriately give the correct prompts and messages to the user. 
 
-        - In the computer_turn_place_hit function, I was facing an issue where when the computer generates a new coordinate and the new coordinate turns out to be where the computer has already placed a hit, it would skip the computer's turn altogether. It turns out that previously, I had 'pass' written in my if statements. The 'pass' statements made the computer skip the turn completely if it was a coordinate where the computer has already placed a hit. I have managed to fix this by using 'continue' instead so that if the computer generates a redundant coordinate, it will redo the loop until a unique coordinate is produced.
+    - In the computer_turn_place_hit function, I was facing an issue where when the computer generates a new coordinate and the new coordinate turns out to be where the computer has already placed a hit, it would skip the computer's turn altogether. It turns out that previously, I had 'pass' written in my if statements. The 'pass' statements made the computer skip the turn completely if it was a coordinate where the computer has already placed a hit. I have managed to fix this by using 'continue' instead so that if the computer generates a redundant coordinate, it will redo the loop until a unique coordinate is produced.
 
-        - I was having an issue with the coin_toss function. The function would not register the winner of the coin toss to let that person go first. I managed to get this fixed thanks to Tutor Support who suggested to add:
-        play_game = coin_toss(user_board, computer_board)
-        play_game()
+    - I was having an issue with the coin_toss function. The function would not register the winner of the coin toss to let that person go first. I managed to get this fixed thanks to Tutor Support who suggested to add:
+    play_game = coin_toss(user_board, computer_board)
+    play_game()
 
-    - There are no unresolved bugs in the game.  
+- There are no unresolved bugs in the game.  
 
 ## Deployment
 
