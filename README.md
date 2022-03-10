@@ -299,6 +299,12 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ### Acknowledgements
 
+- I would like to thank everyone on the Code Institute Slack Channel who gave up their free time to help me with my queries. 
+
+- I would like to thank Tutor Support lots for helping me with my code and when I got stuck. Everyone was extremely helpful and showed me the correct way.
+
+- I would like to thank my mentor a lot for his help and his support throughout this project.
+
 
 
 
