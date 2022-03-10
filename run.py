@@ -93,8 +93,8 @@ class GameBoard:
         self.computer_score = 0
         self.column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
 
-    # Code credit on display_board(self) goes to Damian Jacob
-    # https://github.com/Damianjacob/MS3-Battleship-Game
+    # Code credit on display_board(self) and display_computer_board(self)
+    # goes to Damian Jacob: https://github.com/Damianjacob/MS3-Battleship-Game
     def display_board(self):
         '''
         Will display the user's board back
