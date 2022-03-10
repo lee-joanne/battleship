@@ -8,7 +8,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ## User Experience (UX)
 
-* ### User Stories
+### User Stories
 
     - First Time Visitor Goals
 
@@ -28,7 +28,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
         1. As a Returning / Frequent Visitor, I want to be able to play the game again and have the board reshuffled. When I finish playing the game or each time I run the program, the board is reshuffled which makes the game start again from scratch.
 
-* ### Flowchart
+### Flowchart
 
     - Flowchart has been created using the program Whimsical.
 
@@ -42,7 +42,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ## Features
 
-* ### Existing Features:
+### Existing Features:
 
 - Introduction:
 
@@ -203,7 +203,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
     <img src='assets/documentation/computer-wins.png' alt='computer winning'>
     </details>
 
-* ### Future Features:
+### Future Features:
 
 - In the future, I would like the game to be able to keep track of score history. I can do this by the use of Google Drive and creating a spreadsheet to keep track of the score history.
 
@@ -217,13 +217,13 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ## Technologies Used
 
-*  ### Languages and Python Packages/Libraries Used: 
+### Languages and Python Packages/Libraries Used: 
 
 - [Python](https://www.python.org/) 
 - [Numpy](https://numpy.org/)
 - [Random](https://www.w3schools.com/python/module_random.asp)
 
-* ### Frameworks, Libraries & Programs Used
+### Frameworks, Libraries & Programs Used
 
 1. [Git](https://git-scm.com/)
     - Git was used by utilizing the Gitpod terminal to commit to Git and Push to GitHub.
@@ -246,7 +246,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 - Lots of other testing has been done. I have played this game so many times that I wish to take a long break from playing Battleships to test each possible outcome possible of the game to ensure that all is working properly. I have bugged my work colleagues to play the game for me and they most likely are also sick of the game. I ensured that validation checks are done when typing in input responses to ensure that the game is registering that my input is invalid and will prompt me to try again. I have played the game numerous times here on Gitpod, IDLE, Spyder, and the deployed Heroku live site. All is working fine and no errors are shown. I used Numpy to help me get better control of the two-dimensional array of the game. With Numpy, it was a lot easier to target and create my boards and manipulate the boards when needed. 
 
-* ### Bugs:
+### Bugs:
 
     - There have been many bugs while creating this game, a list of the main bugs encountered:
 
@@ -280,7 +280,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
     7. Name your app (must be a unique name) and select your region, and go to **Create app**.
     8. On the next page after selecting **Create app**, go to the **Settings** tab. Scroll down to **Config Vars** and select **Reveal Config Vars**.
     9. Since no APIs or Creds were used for Pirate Ship, the only Config Vars added was:
-    Key: PORT
+    Key: PORT / 
     Value: 8000
     10. Next, scroll down to **Buildpacks**. Click **Add Buildpack** and select **Python** and **Save Changes**. Next, add **nodejs** and **Save changes**. Ensure Python is on top and nodejs is below. 
     11. Next, scroll up and go to the **Deploy** tab.
@@ -293,11 +293,11 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ## Credits
 
-* ### Code
+### Code
 
-* ### Content
+### Content
 
-* ### Acknowledgements
+### Acknowledgements
 
 
 
