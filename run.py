@@ -88,6 +88,7 @@ class GameBoard:
             ["5", "| |", "| |", "| |", "| |", "| |"],
         ]
         self.board_array = np.array(self.board)
+        self.computer_displayed_board = np.array(self.board)
         self.user_score = 0
         self.computer_score = 0
         self.column_map = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6}
@@ -96,15 +97,21 @@ class GameBoard:
     # https://github.com/Damianjacob/MS3-Battleship-Game
     def display_board(self):
         '''
-        Will display the user board and computer board
-        to the user. Labels will be shown above to
-        distinguish whose board belongs to who.
+        Will display the user's board back
+        to the user.
         '''
-        if self.name == computer_board.name:
-            print("\nEnemy's Board\n")
-        else:
-            print(f"\n {user_name}'s Board:\n")
-        for row in self.board_array:
+        print(f"\n {user_name}'s Board:\n")
+        for row in user_board.board_array:
+            joint_row = "  ".join(row)
+            print(f"{joint_row}\n")
+    
+    def display_computer_board(self):
+        '''
+        Will display the empty computer board
+        to the user.
+        '''
+        print("Enemy's Board:\n")
+        for row in self.computer_displayed_board:
             joint_row = "  ".join(row)
             print(f"{joint_row}\n")
 
@@ -122,7 +129,6 @@ class GameBoard:
             else:
                 self.board_array[row, column] = '|O|'
                 ship_count += 1
-        self.display_board()
 
     def validate_y_coordinate(self):
         '''
@@ -168,7 +174,8 @@ class GameBoard:
     def ask_user_start(self):
         '''
         Function will ask user if they wish to place their own ships.
-        If n, ship coordinates will be randomized.
+        If n, ship coordinates will be randomized and boards will
+        be shown to the user.
         If y, function will run function to place ships.
         Function will validate that user types either
         'y' or 'n'.
@@ -183,6 +190,8 @@ class GameBoard:
             elif user_answer == 'n':
                 user_board.randomize_ship_coordinates()
                 computer_board.randomize_ship_coordinates()
+                self.display_board()
+                self.display_computer_board()
                 coin_toss(user_board, computer_board)
                 break
             else:
@@ -245,10 +254,11 @@ class GameBoard:
             user_board.display_board()
             if added_ship_count == 5:
                 print('')
-                print('Great job placing the ships!')
+                print("Great job placing the ships! Let's start the game!")
                 print('')
-                user_board.display_board()
                 computer_board.randomize_ship_coordinates()
+                self.display_board()
+                self.display_computer_board()
                 coin_toss(user_board, computer_board)
 
     def user_turn_place_hit(self):
@@ -266,29 +276,30 @@ class GameBoard:
             print('')
             print("Take a hit at the enemy's board!")
             print('')
-            computer_board.display_board()
+            self.display_computer_board()
             y_coord = self.column_map[self.validate_y_coordinate()]
             x_coord = int(self.validate_x_coordinate())
             if self.board_array[x_coord, y_coord] == '|O|':
+                self.computer_displayed_board[x_coord, y_coord] = '|X|'
                 self.board_array[x_coord, y_coord] = '|X|'
                 print('')
                 print(f'You hit a battleship! Great job Pirate {user_name}!')
                 print('')
                 self.user_score += 1
                 break
-            elif self.board_array[x_coord, y_coord] == '|X|':
+            elif self.computer_displayed_board[x_coord, y_coord] == '|X|':
                 print('')
                 print("You already hit here! Try again!")
-            elif self.board_array[x_coord, y_coord] == '|-|':
+            elif self.computer_displayed_board[x_coord, y_coord] == '|-|':
                 print('')
                 print("You already hit here! Try again!")
             else:
-                self.board_array[x_coord, y_coord] = '|-|'
+                self.computer_displayed_board[x_coord, y_coord] = '|-|'
                 print('')
                 print("You missed!")
                 print('')
                 break
-        self.display_board()
+        self.display_computer_board()
         if self.user_score < 5:
             user_board.computer_turn_place_hit()
 
