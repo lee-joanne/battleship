@@ -1,19 +1,19 @@
 # Pirate Ship
 
 - [Pirate Ship](#pirate-ship)
-  * [User Experience (UX)](#user-experience--ux-)
+  * [User Experience (UX)](#user-experience--ux)
     + [User Stories](#user-stories)
     + [Flowchart](#flowchart)
   * [How To Play](#how-to-play)
   * [Features](#features)
-    + [Existing Features:](#existing-features-)
-    + [Future Features:](#future-features-)
+    + [Existing Features](#existing-features)
+    + [Future Features](#future-features)
   * [Data Model](#data-model)
   * [Technologies Used](#technologies-used)
-    + [Languages and Python Packages/Libraries Used:](#languages-and-python-packages-libraries-used-)
+    + [Languages and Python Packages/Libraries Used](#languages-and-python-packages-libraries-used)
     + [Frameworks, Libraries & Programs Used](#frameworks--libraries---programs-used)
   * [Testing](#testing)
-    + [Bugs:](#bugs-)
+    + [Bugs](#bugs)
   * [Deployment](#deployment)
   * [Credits](#credits)
     + [Code](#code)
@@ -64,7 +64,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ## Features
 
-### Existing Features:
+### Existing Features
 
 - Introduction:
 
@@ -226,7 +226,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
     <img src='assets/documentation/computer-wins.png' alt='computer winning'>
     </details>
 
-### Future Features:
+### Future Features
 
 - In the future, I would like the game to be able to keep track of score history. I can do this by the use of Google Drive and creating a spreadsheet to keep track of the score history.
 
@@ -240,7 +240,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ## Technologies Used
 
-### Languages and Python Packages/Libraries Used: 
+### Languages and Python Packages/Libraries Used
 
 - [Python](https://www.python.org/) 
 - [Numpy](https://numpy.org/)
@@ -274,7 +274,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 - Lots of other testing has been done. I have played this game so many times that I wish to take a long break from playing Battleships to test each possible outcome of the game to ensure that all is working properly. I have bugged my work colleagues to play the game for me and they most likely are also sick of the game. I ensured that validation checks are done when typing in all input responses to ensure that the game is registering that my input is invalid and will prompt me to try again. I have played the game numerous times here on Gitpod, IDLE, Spyder, and the deployed Heroku live site. All is working fine and no errors are shown. I used Numpy to help me get better control of the two-dimensional array of the game. With Numpy, it was a lot easier to target and create my boards and manipulate the boards when needed. 
 
-### Bugs:
+### Bugs
 
 - There have been many bugs while creating this game, a list of the main bugs encountered:
 
