@@ -21,7 +21,7 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-Ahoy matey! Welcome to Pirate Ship, a game that is pretty much Battleships but with a different name! Pirate Ship is a Python terminal game
+Ahoy matey! Welcome to Pirate Ship, a game that is pretty much Battleships but with a different name! Pirate Ship is a Python terminal-based game
 to test wits, skills, and luck. The user must try to hit all of the computer's five ships before the computer hits all of the user's ships.
 The five ships are placed on a 5 by 5 board (letters ranging from A to E, and numbers from 1 to 5), with each ship occupying a single (x, y) coordinate. The users must type in an (x, y) coordinate to try to guess where the computer's ships are placed. But watch out! The computer will also generate a random coordinate to try to attack back. Whoever takes down all five ships first wins!
 
@@ -37,7 +37,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
     1. As a First Time User, I want to fully understand what this game is called. I can see at the very beginning, the game is called Pirate Ship and seems to
     talk back to me with a pirate tone of voice to make it more fun.
 
-    2. As a First Time User, I want to understand how to play the game. After typing in my name to the game, the game responds with my name which is nice to personalize the game, and gives me a very thorough explanation on how to play the game. I know exactly what is expected of me, what I need to achieve in this game, and how I can achieve it. The game also explains the different labels I will expect to see on the board, what |X|, |O|, and |-| mean. 
+    2. As a First Time User, I want to understand how to play the game. After typing in my name to the game, the game responds with my name which is nice to personalize the game, and gives me a very thorough explanation on how to play the game. I know exactly what is expected of me, what I need to achieve in this game, and how I can achieve it. The game also explains what the different symbols on the board mean (|X|, |O|, and |-|). 
 
     3. As a First Time User, I want the choice to be able to either place my own ships or have my ships randomized. After seeing the description of the game and typing in that I am ready to start, the game allows me to choose. If I choose to place my own ships, I can type in my desired coordinates the game shows me the updated board each time. If I accidentally put in a ship where I have already put one, the game lets me know and allows me to try again. If I choose to have the board randomized instead, my ships will be randomized and the game will start. I can clearly see where all of my ships are placed on the randomized board.
 
@@ -52,9 +52,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ### Flowchart
 
-- Flowchart has been created using the program Whimsical.
-
--  Flowchart - [View](assets/documentation/whimsical_map.png)
+- Flowchart has been created using the program Whimsical [View](assets/documentation/whimsical_map.png).
 
 ## How To Play
 
@@ -243,8 +241,12 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 ### Languages and Python Packages/Libraries Used
 
 - [Python](https://www.python.org/) 
+
 - [Numpy](https://numpy.org/)
+    - I used Numpy two-dimensional arrays for creating / manipulating the game board. 
+
 - [Random](https://www.w3schools.com/python/module_random.asp)
+    - Random was used to generate random integers throughout the Pirate Ship game (coin_toss function, randomizing ship coordinates, etc).
 
 ### Frameworks, Libraries & Programs Used
 
@@ -266,13 +268,19 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 6.  [Ecotrust-Canada Markdown-toc](https://ecotrust-canada.github.io/markdown-toc/)
     - Ecotrust-Canada Markdown was used to create the table of contents for this README. 
 
+7. [IDLE](https://docs.python.org/3/library/idle.html)
+    - IDLE was used to test out the game functionality outside of Gitpod. Numpy was installed on the computer using Terminal.
+
+8. [Spyder](https://www.spyder-ide.org/)
+    - Spyder was used to test out the game functionality outside of Gitpod. 
+
 ## Testing
 
 - When copying and pasting my run.py code into the PEP8 validator, it comes back as 'all right' with no errors or warnings to show.
 
 ![Screenshot of pep8 validator](assets/documentation/pep8-validator.png)
 
-- Lots of other testing has been done. I have played this game so many times that I wish to take a long break from playing Battleships to test each possible outcome of the game to ensure that all is working properly. I have bugged my work colleagues to play the game for me and they most likely are also sick of the game. I ensured that validation checks are done when typing in all input responses to ensure that the game is registering that my input is invalid and will prompt me to try again. I have played the game numerous times here on Gitpod, IDLE, Spyder, and the deployed Heroku live site. All is working fine and no errors are shown. I used Numpy to help me get better control of the two-dimensional array of the game. With Numpy, it was a lot easier to target and create my boards and manipulate the boards when needed. 
+- Lots of other testing has been done. I have played this game so many times that I wish to take a long break from playing Battleships to test each possible outcome of the game to ensure that all is working properly (game registering when computer wins, when user wins, when user misses ships, when comptuer misses ships, user adding their own coordinates, ensuring all randomized ship coordinates are unique and always five are placed each, etc). I have asked my work colleagues to play my game and to test it out. I ensured that validation checks are done when typing in all input responses to ensure that the game is registering that my input is invalid and will prompt me to try again until accepted. I have played the game numerous times here on Gitpod, IDLE, Spyder, and the deployed Heroku live site. All is working fine and no errors are shown.
 
 ### Bugs
 
@@ -292,7 +300,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 - Unresolved Bugs: 
 
-    - The main unresolved bug in this game is trying to split the run.py Python file into multiple files instead of having it as one large file. Ideally, I would like to have one run.py file as the main file, and one boardclass.py file to hold the GameBoard class. I tried to split my run.py file into multiple files but I was running into lots of import issues because I have lots of variables and lots of functions that are scattered across the run.py file, it was a very difficult puzzle to be able to have my imports non-circular. I was running into many error messages (ImportError: cannot import name, circular import, etc) and I tried to create multiple files for the import to look like: introduction.py -> boardclass.py -> run.py. However, it was much too difficult because one file was dependent on variables and functions from both files and the run.py file would have to be last, but introduction.py file and boardclass.py file needed variables from the run.py file so I have decided to leave all my code in the run.py file. However, moving forward, I will definitely create multiple files from the beginning to avoid this issue because I understand that having multiple Python files is best practice for being a good developer.
+    - The main unresolved bug in this game is trying to split the run.py Python file into multiple files instead of having it as one large file. Ideally, I would like to have one run.py file as the main file, and one boardclass.py file to hold the GameBoard class. I tried to split my run.py file into multiple files but I was running into lots of import issues because I have lots of variables and lots of functions that are scattered across the run.py file, it was a very difficult puzzle to be able to have my imports non-circular. I was running into many error messages (ImportError: cannot import name, ImportError: cannot import name 'GameBoard' from partially initialized module 'boardclass' (most likely due to a circular import), etc) and I tried to create multiple files for the import to look like: introduction.py -> boardclass.py -> run.py. However, it was much too difficult because one file was dependent on variables and functions from both files and the run.py file would have to be last, but introduction.py file and boardclass.py file needed variables from the run.py file so I have decided to leave all my code in the run.py file. However, moving forward, I will definitely create multiple files from the beginning to avoid this issue because I understand that having multiple Python files is best practice for being a good developer.
 
 ## Deployment
 
@@ -327,7 +335,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 - Love Sandwiches:
 
-    - Python Try Except code has been taken from the Code Institute Love Sandwiches example.
+    - Try Except code has been taken from the Code Institute Love Sandwiches example.
 
 - Code Institute Battleships Example:
 
@@ -337,13 +345,17 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
     - This YouTube video was referred to for getting inspiration on the GameBoard class and converting the A, B, C, D, E strings to numbers.
 
+- [This YouTube video](https://www.youtube.com/watch?v=xECXZ3tyONo&t=430s&ab_channel=PythonProgrammer)
+
+    - This YouTube video was referred to a lot to understand how to use Numpy arrays for the game board. 
+
 - Peer Code Review:
 
     - I have viewed other students' code in Peer Code Review for inspiration. I have used and cited some of [Damian Jacob's code](https://github.com/Damianjacob/MS3-Battleship-Game) on displaying the board and the board layout and [Faris-07](https://github.com/Faris-07/Battleship)'s code was looked at for inspiration.
 
 - [W3 Schools](https://www.w3schools.com/)
 
-    - W3 Schools was referred to many times for help with Python functions.
+    - W3 Schools was referred to many times for help with Python functions. [This post](https://www.w3schools.com/python/numpy/numpy_creating_arrays.asp) in particular was referred to lots to understand how to use Numpy arrays for the game board.
 
 - [Stack Overflow](https://stackoverflow.com/)
 
