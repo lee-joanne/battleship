@@ -1,10 +1,32 @@
 # Pirate Ship
 
+- [Pirate Ship](#pirate-ship)
+  * [User Experience (UX)](#user-experience--ux-)
+    + [User Stories](#user-stories)
+    + [Flowchart](#flowchart)
+  * [How To Play](#how-to-play)
+  * [Features](#features)
+    + [Existing Features:](#existing-features-)
+    + [Future Features:](#future-features-)
+  * [Data Model](#data-model)
+  * [Technologies Used](#technologies-used)
+    + [Languages and Python Packages/Libraries Used:](#languages-and-python-packages-libraries-used-)
+    + [Frameworks, Libraries & Programs Used](#frameworks--libraries---programs-used)
+  * [Testing](#testing)
+    + [Bugs:](#bugs-)
+  * [Deployment](#deployment)
+  * [Credits](#credits)
+    + [Code](#code)
+    + [Acknowledgements](#acknowledgements)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 Ahoy matey! Welcome to Pirate Ship, a game that is pretty much Battleships but with a different name! Pirate Ship is a Python terminal game
 to test wits, skills, and luck. The user must try to hit all of the computer's five ships before the computer hits all of the user's ships.
 The five ships are placed on a 5 by 5 board (letters ranging from A to E, and numbers from 1 to 5), with each ship occupying a single (x, y) coordinate. The users must type in an (x, y) coordinate to try to guess where the computer's ships are placed. But watch out! The computer will also generate a random coordinate to try to attack back. Whoever takes down all five ships first wins!
 
 [View live project here](https://pirate-ship54.herokuapp.com/)
+
 
 ## User Experience (UX)
 
@@ -15,14 +37,14 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
     1. As a First Time User, I want to fully understand what this game is called. I can see at the very beginning, the game is called Pirate Ship and seems to
     talk back to me with a pirate tone of voice to make it more fun.
 
-    2. As a First Time User, I want to understand how to play the game. After typing in my name to the game, the game responds with my name which is nice to personalize the game, and gives me a very thorough explanation on how to play the game. I know exactly what is expected of me, what I need to achieve in this game, and how I can achieve it. The game also explains the different labels I will expect to see on the board, what |X|, |O|, and |-| are. 
+    2. As a First Time User, I want to understand how to play the game. After typing in my name to the game, the game responds with my name which is nice to personalize the game, and gives me a very thorough explanation on how to play the game. I know exactly what is expected of me, what I need to achieve in this game, and how I can achieve it. The game also explains the different labels I will expect to see on the board, what |X|, |O|, and |-| mean. 
 
-    3. As a First Time User, I want the choice to be able to either place my own ships or have my ships randomized. After seeing the description of the game, the game allows me to choose. If I choose to place my own ships, the game shows me the updated board each time I put in a new ship. Each time I accidentally put in a ship where I have already put one, the game lets me know and allows me to try again. If I choose to have the board randomized, my boards will be randomized and the game will start. I can clearly see where all of my ships are placed on the randomized board.
+    3. As a First Time User, I want the choice to be able to either place my own ships or have my ships randomized. After seeing the description of the game and typing in that I am ready to start, the game allows me to choose. If I choose to place my own ships, I can type in my desired coordinates the game shows me the updated board each time. If I accidentally put in a ship where I have already put one, the game lets me know and allows me to try again. If I choose to have the board randomized instead, my ships will be randomized and the game will start. I can clearly see where all of my ships are placed on the randomized board.
 
     4. As a First Time User, I want feedback on whether I have hit the computer ships or if the computer ship has hit mine. The game is very thorough in communicating with me whether my ship or the computer's ship has been hit and always shows me an updated view of the board after every turn. The game is
     very communicative with me when I accidentally put in incorrect or invalid coordinates and allows me to try again until I put in a correct value.
 
-    5. As a First Time User, I want to know the outcome at the end of the game and to be communicated with if I have lost or won the game. At the end of the game, the game tells me if I have lost or won and gives me an appropriate message for each occassion.
+    5. As a First Time User, I want to know the outcome at the end of the game and to be communicated with if I have lost or won the game. At the end of the game, the game tells me if I have lost or won and gives me an appropriate message for each occasion.
 
 - Returning / Frequent Visitor Goals
 
@@ -60,7 +82,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 - Instructions:
 
-    - After the user types in their name, the game will give the story line and instructions on how to play the game. The game will ask the user if they are ready to start the game, the user must type either 'aye' or 'nay'. The game will convert all letters to lowercase so if the user types 'Aye' or 'Nay' it will still be registered. If the user does not type either 'aye' or 'nay', the game will prompt again for the user to type the correct response. If the user chooses 'nay', the game will close. If the user chooses 'aye', the game will ask the user if they wish to place their own ships, which takes us to the next feature...
+    - After the user types in their name, the game will give the storyline and instructions on how to play the game. The game will ask the user if they are ready to start the game, the user must type either 'aye' or 'nay'. The game will convert all letters to lowercase so if the user types 'Aye' or 'Nay' it will still be registered. If the user does not type either 'aye' or 'nay', the game will prompt again for the user to type the correct response. If the user chooses 'nay', the game will close. If the user chooses 'aye', the game will ask the user if they wish to place their own ships, which takes us to the next feature...
 
     <details>
     <summary>Screenshot of Game Instructions</summary>
@@ -84,7 +106,8 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 - User Choosing Coordinates:
 
-    - After the user chooses 'aye' to start the game, the game will ask if the user wishes to add their own coordinates or not. Here, the user must either type 'y' or 'n' for the game to register the response. The game will convert the user's response to lowercase so 'Y' or 'N' are also registered as valid responses. If the user selects 'y', the game will prompt the user to type in their first coordinate. The user can choose a letter from A to E first. If the user types in an invalid response, the game will prompt the user to retry. 
+    - After the user types 'aye' to start the game, the game will ask if the user wishes to add their own coordinates or not. Here, the user must either type 'y' or 'n' for the game to register the response. The game will convert the user's response to lowercase so 'Y' or 'N' are also registered as valid responses. If the user selects 'y', the game will prompt the user to type in their first coordinate. The user can choose a letter from A to E first. If the user types in an invalid response, the game will prompt the user to retry. 
+
     - After typing in the letter coordinate, the game will prompt the user to type in their number coordinate from 1 to 5. After typing in the correct number, the ship placement on the board will be shown to the user. If the user types in an invalid response, the game will again prompt the user to retry. 
     Each time the user places a new ship, the updated board will always be shown back to the user. If the user accidentally types in a coordinate twice, the game will let the user know and tell the user to try again. When the user places all five ships, the final board will be revealed again, telling the user good job on placing the board and tells the user that the game will start. The user's ships are marked as |O|.
 
@@ -209,11 +232,11 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 - In the future, I would like to be able to have the boards side by side rather than having the user scroll up and down to see the user board and computer board. This feature would be a great user experience to not have to scroll constantly and be able to compare their board to the computer's board easily. 
 
-- In the future, I want there to be different sizes of ships, ranging from 2 by 1, 3 by 1, etc. This way, there will be more diversity in the game and it will allow the game to be much harder. With this, the board size will need to be bigger as well to accomodate the different ship sizes. 
+- In the future, I want there to be different sizes of ships, ranging from 2 by 1, 3 by 1, etc. This way, there will be more diversity in the game and it will allow the game to be much harder. With this, the board size will need to be bigger as well to accommodate the different ship sizes. 
 
 ## Data Model
 
-- For the model of the game, I have created the GameBoard class. The game will create two instances, one for the user_board and one for the computer_board. The GameBoard class will create the boards for the user and computer, the randomize ship coordinates (depending on the user's choice of placing their own ships or randomizing coordinates), placing the ships on the board, labelling the boards, and displaying the boards back to the user. The user and computer are also able to generate hits at each other's boards. The class methods are extremely important for the game to function as majority of the functionality relies on this class.
+- For the model of the game, I have created the GameBoard class. The game will create two instances, one for the user_board and one for the computer_board. The GameBoard class will create the boards for the user and computer, randomize the ship coordinates (depending on the user's choice of placing their own ships or randomizing coordinates), place the ships on the board, label the boards, and display the boards back to the user. The user and computer are also able to generate hits at each other's boards. The class methods are extremely important for the game to function as majority of the functionality relies on this class.
 
 ## Technologies Used
 
@@ -227,14 +250,19 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 1. [Git](https://git-scm.com/)
     - Git was used by utilizing the Gitpod terminal to commit to Git and Push to GitHub.
+
 2. [GitHub](https://github.com/)
     - GitHub was used to store the project code after being pushed in by Git. Project repository linked with Heroku for deployment process. 
+
 3. [Heroku](https://dashboard.heroku.com/login)
     - Heroku was used to deploy the Python project as a terminal based game after signing in with GitHub. 
+
 4. [Whimsical](https://whimsical.com)
     - Whimsical was used to create the flowchart for the game. 
+
 5. [PEP8 Online Check](http://pep8online.com/)
     - PEP8 Online Check was used to validate the Python code used and check for warnings/errors. 
+
 6.  [Ecotrust-Canada Markdown-toc](https://ecotrust-canada.github.io/markdown-toc/)
     - Ecotrust-Canada Markdown was used to create the table of contents for this README. 
 
@@ -244,13 +272,13 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ![Screenshot of pep8 validator](assets/documentation/pep8-validator.png)
 
-- Lots of other testing has been done. I have played this game so many times that I wish to take a long break from playing Battleships to test each possible outcome possible of the game to ensure that all is working properly. I have bugged my work colleagues to play the game for me and they most likely are also sick of the game. I ensured that validation checks are done when typing in input responses to ensure that the game is registering that my input is invalid and will prompt me to try again. I have played the game numerous times here on Gitpod, IDLE, Spyder, and the deployed Heroku live site. All is working fine and no errors are shown. I used Numpy to help me get better control of the two-dimensional array of the game. With Numpy, it was a lot easier to target and create my boards and manipulate the boards when needed. 
+- Lots of other testing has been done. I have played this game so many times that I wish to take a long break from playing Battleships to test each possible outcome of the game to ensure that all is working properly. I have bugged my work colleagues to play the game for me and they most likely are also sick of the game. I ensured that validation checks are done when typing in all input responses to ensure that the game is registering that my input is invalid and will prompt me to try again. I have played the game numerous times here on Gitpod, IDLE, Spyder, and the deployed Heroku live site. All is working fine and no errors are shown. I used Numpy to help me get better control of the two-dimensional array of the game. With Numpy, it was a lot easier to target and create my boards and manipulate the boards when needed. 
 
 ### Bugs:
 
 - There have been many bugs while creating this game, a list of the main bugs encountered:
 
-    - First bug was being unable to hide the computer's ships from the user. There was one function to display the board by inputting both the user and computer names into the GameBoard class. The randomize_ship_coordinates function would also produce randomized coordinates and previewed both ships to the user. After getting help from Tutor Support, I was able to create two separate functions to display the ships, one for the computer's ships (empty board) and one for the user's ships. In the user_turn_place_hit function, I was able to target the computer's ships based on the real computer board ship placement and the empty displayed computer board will preview whether the user has missed or not. 
+    - First bug was being unable to hide the computer's ships from the user. There was one function to display the board by inputting both the user and computer names into the GameBoard class. The randomize_ship_coordinates function would also produce randomized coordinates and preview both ships to the user. After getting help from Tutor Support, I was able to create two separate functions to display the ships, one for the computer's ships (empty board) and one for the user's ships. In the user_turn_place_hit function, I was able to target the computer's ships based on the real computer board ship placement and the empty displayed computer board will preview whether the user has missed or not. 
 
     - I was facing many problems of having my Python lines too long, whether it be from long print statements, long variable names, or long docstrings. The longest string I had was the introduction of the game. I managed to fix the issue of having the introduction of the game too long by creating the variable, 'introduction', and having the string assigned to it. I, then, printed this variable in the introduce_game function. For the docstrings, I managed to make multiple lines for my docstrings to ensure they do not exceed Python's limit. As well, I have tried to shorten variable names to make them short, but still comprehensive.
 
@@ -262,7 +290,9 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
     play_game = coin_toss(user_board, computer_board)
     play_game()
 
-- There are no unresolved bugs in the game.  
+- Unresolved Bugs: 
+
+    - The main unresolved bug in this game is trying to split the run.py Python file into multiple files instead of having it as one large file. Ideally, I would like to have one run.py file as the main file, and one boardclass.py file to hold the GameBoard class. I tried to split my run.py file into multiple files but I was running into lots of import issues because I have lots of variables and lots of functions that are scattered across the run.py file, it was a very difficult puzzle to be able to have my imports non-circular. I was running into many error messages (ImportError: cannot import name, circular import, etc) and I tried to create multiple files for the import to look like: introduction.py -> boardclass.py -> run.py. However, it was much too difficult because one file was dependent on variables and functions from both files and the run.py file would have to be last, but introduction.py file and boardclass.py file needed variables from the run.py file so I have decided to leave all my code in the run.py file. However, moving forward, I will definitely create multiple files from the beginning to avoid this issue because I understand that having multiple Python files is best practice for being a good developer.
 
 ## Deployment
 
@@ -273,7 +303,7 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
     1. Ensure that the template used for the project is made with the Code Institute Python template linked above. 
     2. Second, in all Python scripts, ensure that input methods have a new line character at the end of the text inside.
-    3. If any packages or installments were made, type in the following command in the terminal: **'pip3 freeze > requirements.txt'** so these installments / dependencies can work on Heroku. After typing this in, the requirements.txt file in the Code Institute Python template will automataically be updated. 
+    3. If any packages or installments were made, type in the following command in the terminal: **'pip3 freeze > requirements.txt'** so these installments / dependencies can work on Heroku. After typing this in, the requirements.txt file in the Code Institute Python template will automatically be updated. 
     4. Commit and push these changes onto GitHub.
     5. [Create an account for Heroku](https://id.heroku.com/login)
     6. On the Heroku dashboard, go to **Create new app**. 
@@ -295,7 +325,37 @@ The five ships are placed on a 5 by 5 board (letters ranging from A to E, and nu
 
 ### Code
 
-### Content
+- Love Sandwiches:
+
+    - Python Try Except code has been taken from the Code Institute Love Sandwiches example.
+
+- Code Institute Battleships Example:
+
+    - The GameBoard class has been inspired by the Code Institute Battleships example.
+
+- [This YouTube video](https://www.youtube.com/watch?v=alJH_c9t4zw&t=377s&ab_channel=KnowledgeMavens)
+
+    - This YouTube video was referred to for getting inspiration on the GameBoard class and converting the A, B, C, D, E strings to numbers.
+
+- Peer Code Review:
+
+    - I have viewed other students' code in Peer Code Review for inspiration. I have used and cited some of [Damian Jacob's code](https://github.com/Damianjacob/MS3-Battleship-Game) on displaying the board and the board layout and [Faris-07](https://github.com/Faris-07/Battleship)'s code was looked at for inspiration.
+
+- [W3 Schools](https://www.w3schools.com/)
+
+    - W3 Schools was referred to many times for help with Python functions.
+
+- [Stack Overflow](https://stackoverflow.com/)
+
+    - Stack Overflow was referred to many times for helping me debug my code. Code from posts have been used for the "not in [list]" (if y_choice not in y_list:) to validate number and letter inputs for the coordinates. 
+
+- [Code Review Stack Exchange](https://codereview.stackexchange.com/questions/229526/battleships-oop-python)
+
+    - Inspiration on Battleships object oriented programming was taken from this post.
+
+- Tutor Support:
+
+    - Code was taken by Tutor Support when they helped me create my project, such as the coin_toss function.
 
 ### Acknowledgements
 
