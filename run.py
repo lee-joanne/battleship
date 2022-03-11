@@ -14,66 +14,14 @@ hit, it will be marked as '|X|'. If it's a miss, it will be marked
 as '|-|'. A coin toss will be done to see who gets to shoot first."""
 
 
-def introduce_game():
-    '''
-    Initial message to introduce title of the game.
-    Input will appear for user to type in their name.
-    While loop will ensure that user does not leave
-    the name input empty.
-    Paragraph will appear to explain rules of the game
-    and ask user if they wish to continue.
-    '''
-    print('-' * 80)
-    print('')
-    print("Welcome to Pirate Ship!")
-    print('')
-    print('-' * 80)
-    print('')
-    global user_name
-    while True:
-        user_name = input("Ahoy matey! Please enter your pirate name:\n")
-        print('')
-        if user_name == '':
-            print("Please enter a name!")
-            print('')
-        else:
-            break
-    print(f"Welcome aboard Pirate {user_name}!")
-    print(user_instructions)
-    print('')
-    print(f"Are you ready, Pirate {user_name}?")
-    print('')
-
-
-def ask_user_ready():
-    '''
-    Asks the user if they are ready to play the game or not.
-    Loops the response until valid response is given, either
-    'aye' or 'nay' must be written.
-    '''
-    while True:
-        confirmation_response = input("aye or nay?\n").lower()
-
-        if confirmation_response == 'aye':
-            start_game()
-            break
-        elif confirmation_response == 'nay':
-            end_game()
-            break
-        else:
-            print('')
-            print("You must type either 'aye' or 'nay'!")
-            print('')
-
-
 class GameBoard:
-    '''
+    """
     Main board class for the game. Sets the names for the game
     (user and computer), board layout, board array using
     Numpy, sets the user score and computer score
     at 0, and the column map to convert the letter
     coordinates to numbers.
-    '''
+    """
 
     def __init__(self, name):
         self.name = name
@@ -96,30 +44,30 @@ class GameBoard:
     # Code credit on display_board(self) and display_computer_board(self)
     # goes to Damian Jacob: https://github.com/Damianjacob/MS3-Battleship-Game
     def display_board(self):
-        '''
+        """
         Will display the user's board back
         to the user.
-        '''
+        """
         print(f"\n {user_name}'s Board:\n")
         for row in user_board.board_array:
             joint_row = "  ".join(row)
             print(f"{joint_row}\n")
 
     def display_computer_board(self):
-        '''
+        """
         Will display the empty computer board
         to the user.
-        '''
+        """
         print("Enemy's Board:\n")
         for row in self.computer_displayed_board:
             joint_row = "  ".join(row)
             print(f"{joint_row}\n")
 
     def randomize_ship_coordinates(self):
-        '''
+        """
         Function will randomly create coordinates on where to place the ships.
         Function will place the ships, marked as |O|.
-        '''
+        """
         ship_count = 0
         while ship_count < 5:
             column = random.randint(1, 5)
@@ -131,11 +79,11 @@ class GameBoard:
                 ship_count += 1
 
     def validate_y_coordinate(self):
-        '''
+        """
         Function will validate whether input from user
         is a letter ranging from A to E, or else will
         return ValueError message.
-        '''
+        """
         while True:
             try:
                 print('')
@@ -152,11 +100,11 @@ class GameBoard:
         return y_choice
 
     def validate_x_coordinate(self):
-        '''
+        """
         Function will validate whether input from user
         is a number ranging from 1 to 5, or else will
         return ValueError message.
-        '''
+        """
         while True:
             try:
                 x_choice = (input("Input number coordinate (1 to 5):\n"))
@@ -171,15 +119,15 @@ class GameBoard:
                 break
         return x_choice
 
-    def ask_user_start(self):
-        '''
+    def ask_user_ship_placement(self):
+        """
         Function will ask user if they wish to place their own ships.
         If n, ship coordinates will be randomized and boards will
         be shown to the user.
         If y, function will run function to place ships.
         Function will validate that user types either
         'y' or 'n'.
-        '''
+        """
         print('')
         while True:
             print("Would you like to place the ships yourself?")
@@ -200,7 +148,7 @@ class GameBoard:
                 print('')
 
     def user_choose_ship_placement(self):
-        '''
+        """
         Function will allow user to input their own desired
         coordinates. Validations will run first to see if user
         types in a letter coordinate from A to E. Next, validation
@@ -211,7 +159,7 @@ class GameBoard:
         coordinate, message will show to user to try again.
         When all five ships are placed, board will be displayed
         and coin toss function will run.
-        '''
+        """
         user_board.display_board()
         added_ship_count = 0
         while added_ship_count < 5:
@@ -262,7 +210,7 @@ class GameBoard:
                 coin_toss(user_board, computer_board)
 
     def user_turn_place_hit(self):
-        '''
+        """
         Function will allow user to type in coordinates
         to place hit.
         Will give message back to user depending on
@@ -271,7 +219,7 @@ class GameBoard:
         coordinate or redundant coordinate. Will display the board
         to the user when coordinates are accepted. If user score
         is below 5, will allow the computer to go next.
-        '''
+        """
         while True:
             print('')
             print("Take a hit at the enemy's board!")
@@ -304,14 +252,14 @@ class GameBoard:
             user_board.computer_turn_place_hit()
 
     def computer_turn_place_hit(self):
-        '''
+        """
         When it is the computer's turn, automatically will
         generate a coordinate and direct a hit at the
         user board. Message will show whether the
         enemy has correctly hit the user's ship or
         missed. Will display the user's board back to
         the user after attack is placed.
-        '''
+        """
         print('')
         print("Enemy's turn...")
         while True:
@@ -337,11 +285,11 @@ class GameBoard:
         self.display_board()
 
     def progress_game(self):
-        '''
+        """
         Function will run in a while loop to continously
         play game back and forth until user or
         computer reaches a score of 5.
-        '''
+        """
         while True:
             computer_board.user_turn_place_hit()
             if (computer_board.user_score) == 5:
@@ -354,20 +302,20 @@ class GameBoard:
                 pass
 
     def user_wins(self):
-        '''
+        """
         Function will congratulate user for winning when
         user score reaches 5 points.
-        '''
+        """
         print('')
         print(f"Congratulations Pirate {user_name} You have beat the enemy!")
         print("We have claimed back our beloved treasure! Great job!")
         print("To play again, hit the 'Run Program' button at the top!")
 
     def computer_wins(self):
-        '''
+        """
         Function will let user know they have lost the game
         when computer reaches 5 points.
-        '''
+        """
         print('')
         print(f"Oh no Pirate {user_name}, the enemy has won...")
         print("We will never be able to take back our treasure.")
@@ -376,10 +324,10 @@ class GameBoard:
 
 
 def coin_toss(user_board, computer_board):
-    '''
+    """
     Function will do a coin toss to see
     if the user or computer goes first.
-    '''
+    """
     print('')
     print('A coin toss will be done to see who goes first...')
     print('')
@@ -395,36 +343,89 @@ def coin_toss(user_board, computer_board):
 
 
 def start_game():
-    '''
+    """
     Function will start the game when user confirms game start.
     User board and computer board names are defined to the
     GameBoard class.
-    '''
+    """
     global user_board
     global computer_board
     user_board = GameBoard("name=user")
     computer_board = GameBoard("name=computer")
-    user_board.ask_user_start()
+    user_board.ask_user_ship_placement()
     computer_board.progress_game()
 
 
+def introduce_game():
+    """
+    Initial message to introduce title of the game.
+    Input will appear for user to type in their name.
+    While loop will ensure that user does not leave
+    the name input empty.
+    Paragraph will appear to explain rules of the game
+    and ask user if they wish to continue.
+    """
+    print('-' * 80)
+    print('')
+    print("Welcome to Pirate Ship!")
+    print('')
+    print('-' * 80)
+    print('')
+    global user_name
+    while True:
+        user_name = input("Ahoy matey! Please enter your pirate name:\n")
+        print('')
+        if user_name == '':
+            print("Please enter a name!")
+            print('')
+        else:
+            break
+    print(f"Welcome aboard Pirate {user_name}!")
+    print(user_instructions)
+    print('')
+    print(f"Are you ready, Pirate {user_name}?")
+    print('')
+
+
+def ask_user_ready():
+    """
+    Asks the user if they are ready to play the game or not.
+    Loops the response until valid response is given, either
+    'aye' or 'nay' must be written.
+    """
+    while True:
+        confirmation_response = input("aye or nay?\n").lower()
+
+        if confirmation_response == 'aye':
+            start_game()
+            break
+        elif confirmation_response == 'nay':
+            end_game()
+            break
+        else:
+            print('')
+            print("You must type either 'aye' or 'nay'!")
+            print('')
+
+
 def end_game():
-    '''
+    """
     When user chooses to end game after saying 'nay', will
     create a goodbye message and give instructions to let the
     user know how to reactive the game.
-    '''
+    """
     print('')
     print("Goodbye! To play again, please click 'Run Program'!")
 
 
 def main():
-    '''
+    """
     Main code to execute the entire game. Will introduce the game and
     ask the user if they are ready to play.
-    '''
+    """
     introduce_game()
     ask_user_ready()
 
 
-main()
+if __name__ == '__main__':
+    main()
